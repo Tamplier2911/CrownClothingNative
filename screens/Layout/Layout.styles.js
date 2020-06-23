@@ -5,5 +5,3 @@ export const RootLayout = styled.View`
   background-color: ${globalStyles.clPrimary};
   flex: 1;
 `;
-
-export const LayoutTemporaryText = styled.Text``;
