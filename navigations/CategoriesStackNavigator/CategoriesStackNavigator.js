@@ -2,38 +2,20 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // screens
-// categories screen
-// category screen
-// cart screen
+import CategoriesScreen from "../../screens/CategoriesScreen/CategoriesScreen";
+import ProductsOverviewScreen from "../../screens/ProductsOverviewScreen/ProductsOverviewScreen";
 import ProductDetailsScreen from "../../screens/ProductDetailsScreen/ProductDetailsScreen";
+import CartScreen from "../../screens/CartScreen/CartScreen";
 
 // components
 import DrawerIcon from "../../components/DrawerIcon/DrawerIcon";
+import CartIcon from "../../components/CartIcon/CartIcon";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
 
 // sc
 import {} from "./CategoriesStackNavigator.styles";
-
-// temp
-import { View, Text, Button } from "react-native";
-
-const TempCategoriesScreen = ({ navigation }) => (
-  <View>
-    <Text>Categories</Text>
-    <Button title="category" onPress={() => navigation.navigate("Category")} />
-  </View>
-);
-const TempCategory = ({ navigation }) => (
-  <View>
-    <Text>Text</Text>
-    <Button
-      title="details"
-      onPress={() => navigation.navigate("Product Details")}
-    />
-  </View>
-);
 
 const CategoriesStackNav = createStackNavigator();
 
@@ -43,7 +25,7 @@ const CategoriesStackNavigator = () => {
       initialRouteName="Categories"
       // mode="modal"
       // stack shared options
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: {
           backgroundColor: globalStyles.clBlack,
           // shadowOpacity:0,
@@ -59,8 +41,10 @@ const CategoriesStackNavigator = () => {
           fontFamily: "font",
           fontSize: 16,
         },
-        //   headerRight: () => <CartIcon />
-      }}
+        headerRight: () => (
+          <CartIcon action={() => navigation.navigate("Cart")} />
+        ),
+      })}
     >
       <CategoriesStackNav.Screen
         name="Categories"
@@ -68,14 +52,14 @@ const CategoriesStackNavigator = () => {
           title: "Categories",
           headerLeft: () => <DrawerIcon action={navigation.openDrawer} />,
         })}
-        component={TempCategoriesScreen}
+        component={CategoriesScreen}
       />
       <CategoriesStackNav.Screen
         name="Category"
-        component={TempCategory}
+        component={ProductsOverviewScreen}
         options={({ route }) => ({
-          title: "Category",
-          // route.params.title.length > 25 ? "Category" : route.params.title,
+          title:
+            route?.params?.title?.length > 25 ? "Category" : route.params.title,
           headerStyle: {
             backgroundColor: globalStyles.clBlack,
             // shadowOpacity:0,
@@ -84,11 +68,25 @@ const CategoriesStackNavigator = () => {
         })}
       />
       <CategoriesStackNav.Screen
-        name="Product Details"
+        name="Description"
         component={ProductDetailsScreen}
         options={({ route }) => ({
-          title: "Description",
-          // route.params.title.length > 25 ? "Description" : route.params.title,
+          title:
+            route?.params?.title?.length > 25
+              ? "Description"
+              : route.params.title,
+          headerStyle: {
+            backgroundColor: globalStyles.clBlack,
+            // shadowOpacity:0,
+            // elevation: 0,
+          },
+        })}
+      />
+      <CategoriesStackNav.Screen
+        name="Cart"
+        component={CartScreen}
+        options={({ route }) => ({
+          title: "Cart",
           headerStyle: {
             backgroundColor: globalStyles.clBlack,
             // shadowOpacity:0,

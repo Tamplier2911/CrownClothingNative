@@ -3,11 +3,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // components
 import DrawerIcon from "../../components/DrawerIcon/DrawerIcon";
+import CartIcon from "../../components/CartIcon/CartIcon";
 
 // screens
 import ProductsOverviewScreen from "../../screens/ProductsOverviewScreen/ProductsOverviewScreen";
 import ProductDetailsScreen from "../../screens/ProductDetailsScreen/ProductDetailsScreen";
-// cart screen
+import CartScreen from "../../screens/CartScreen/CartScreen";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -22,7 +23,7 @@ const ProductsStackNavigator = () => {
     <ProductsStackNav.Navigator
       // mode="modal"
       // stack shared options
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: {
           backgroundColor: globalStyles.clBlack,
           // shadowOpacity:0,
@@ -38,8 +39,10 @@ const ProductsStackNavigator = () => {
           fontFamily: "font",
           fontSize: 16,
         },
-        //   headerRight: () => <CartIcon />
-      }}
+        headerRight: () => (
+          <CartIcon action={() => navigation.navigate("Cart")} />
+        ),
+      })}
     >
       <ProductsStackNav.Screen
         name="All Products"
@@ -50,10 +53,26 @@ const ProductsStackNavigator = () => {
         component={ProductsOverviewScreen}
       />
       <ProductsStackNav.Screen
-        name="Product Details"
+        name="Description"
         component={ProductDetailsScreen}
         options={({ route }) => ({
-          title: headerSharedTitleValueProperties(route),
+          // title: "Description",
+          title:
+            route?.params?.title?.length > 25
+              ? "Description"
+              : route.params.title,
+          headerStyle: {
+            backgroundColor: globalStyles.clBlack,
+            // shadowOpacity:0,
+            // elevation: 0,
+          },
+        })}
+      />
+      <ProductsStackNav.Screen
+        name="Cart"
+        component={CartScreen}
+        options={({ route }) => ({
+          title: "Cart",
           headerStyle: {
             backgroundColor: globalStyles.clBlack,
             // shadowOpacity:0,

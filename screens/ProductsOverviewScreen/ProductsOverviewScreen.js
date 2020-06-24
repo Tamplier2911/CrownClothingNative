@@ -3,36 +3,43 @@ import React from "react";
 // redux
 import { useSelector } from "react-redux";
 
+// components
+import ProductItem from "../../components/ProductItem/ProductItem";
+
 // sc
 import {
   ProductsOverviewScreenView,
-  ProductsOverviewScreenText,
   ProductsOverviewScreenFlatList,
 } from "./ProductsOverviewScreen.styles";
 
-// tempo
-import { View, Text } from "react-native";
+const ProductsOverviewScreen = ({ route, navigation }) => {
+  let sneakers = useSelector((state) => state.products.allProducts);
 
-const ProductsOverviewScreen = () => {
-  const sneakers = useSelector((state) => state.products.allProducts);
+  const { navigate } = navigation;
+
+  const filter = route?.params?.filter;
+  if (filter)
+    sneakers = sneakers.filter((obj) => obj.category === filter.toLowerCase());
 
   return (
     <ProductsOverviewScreenView>
-      <ProductsOverviewScreenText>
-        Product Overview Screen
-      </ProductsOverviewScreenText>
+      {/* FIX FLATLIST WEIRD BEHAVIOUR */}
       <ProductsOverviewScreenFlatList
         numColumns={1}
+        // onEndReached={ function }
+        // onEndReachedThreshold={ number }
         data={sneakers}
-        renderItem={(data) => {
-          const { name, price } = data.item;
-
-          return (
-            <View>
-              <Text>{`${name}, ${price}`}</Text>
-            </View>
-          );
-        }}
+        renderItem={(data) => (
+          <ProductItem
+            item={data.item}
+            action={() =>
+              navigate("Description", {
+                title: data.item.name,
+                item: data.item,
+              })
+            }
+          />
+        )}
       />
     </ProductsOverviewScreenView>
   );

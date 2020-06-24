@@ -16,7 +16,7 @@ import {
 const DrawerIcon = ({ action }) => {
   return (
     <DrawerIconContainer>
-      <DrawerIconTouchable onPress={action}>
+      <DrawerIconTouchable onPress={action} activeOpacity={0.5}>
         <DrawerIconWrapper>
           <MaterialCommunityIcons
             name="menu"

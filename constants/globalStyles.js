@@ -9,6 +9,8 @@ export default {
   clFaded: "#969696",
   clInactive: "#898989",
   clOverlay: "rgba(0, 0, 0, 0.411)",
+  clBadge: "#ff3232",
+  clCategory: "rgba(255,255,255,0.8)",
   fontStyle: "font",
   fontStyleLight: "bold",
 };
