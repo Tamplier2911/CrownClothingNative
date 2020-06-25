@@ -8,7 +8,7 @@ export const ButtonTouchable = styled.TouchableOpacity`
 export const ButtonTitleWrapper = styled.View`
   flex: 1;
   padding: 10px;
-  background-color: ${globalStyles.clWhite};
+  background-color: ${globalStyles.clBlack};
   border: 1px solid ${globalStyles.clBlack};
 `;
 
@@ -19,5 +19,5 @@ export const ButtonTitleText = styled.Text`
   font-family: "font";
   text-transform: uppercase;
   font-size: 22px;
-  color: ${globalStyles.clFont};
+  color: ${globalStyles.clWhite};
 `;

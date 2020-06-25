@@ -1,7 +1,8 @@
 import React from "react";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addItemToCart } from "../../redux/cart/cart.actions";
 
 // components
 import Button from "../../components/Button/Button";
@@ -20,14 +21,6 @@ import {
   ProductDetailsScreenButtonView,
 } from "./ProductDetailsScreen.styles";
 
-// id: "14c570cb-9f31-4410-bd39-614ee12091b6",
-// ownerId: "crwn-clothing-shop",
-// category: "hats",
-// name: "Brown Brim",
-// description: "",
-// price: 25,
-// imgUrl: "https://i.ibb.co/ZYW3VTp/brown-brim.png",
-
 const ProductDetailsScreen = ({ route }) => {
   const {
     params: { item },
@@ -35,6 +28,7 @@ const ProductDetailsScreen = ({ route }) => {
   const { id, name, description, price, imgUrl } = item;
 
   const width = useSelector((state) => state.settings.width);
+  const dispatch = useDispatch();
 
   return (
     <ProductDetailsScreenView>
@@ -58,7 +52,10 @@ const ProductDetailsScreen = ({ route }) => {
           </ProductDetailsScreenDescriptionText>
         </ProductDetailsScreenDescriptionView>
         <ProductDetailsScreenButtonView>
-          <Button title={"Add to Cart"} action={() => console.log("clicked")} />
+          <Button
+            title={"Add to Cart"}
+            action={() => dispatch(addItemToCart(item))}
+          />
         </ProductDetailsScreenButtonView>
       </ProductDetailsScreenWrapper>
     </ProductDetailsScreenView>

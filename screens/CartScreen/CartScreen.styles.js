@@ -7,8 +7,27 @@ export const CartScreenView = styled.View`
   background-color: ${globalStyles.clPrimary};
 `;
 
-export const CartScreenText = styled.Text`
+export const CartScreenScrollView = styled.ScrollView`
+  flex: 1;
+`;
+
+export const CartScreenPurchaseView = styled.View`
+  height: 65px;
+  padding: 10px 10px 0px 10px;
+`;
+
+export const CartScreenPurchaseButton = styled.View`
+  flex: 1;
+`;
+
+export const CartScreenIsEmptyView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CartScreenIsEmptyText = styled.Text`
   font-family: "font";
-  font-size: 18px;
+  font-size: 25px;
   color: ${globalStyles.clFont};
 `;

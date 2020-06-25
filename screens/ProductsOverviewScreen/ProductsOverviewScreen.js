@@ -10,25 +10,44 @@ import ProductItem from "../../components/ProductItem/ProductItem";
 import {
   ProductsOverviewScreenView,
   ProductsOverviewScreenFlatList,
+  ProductsOverviewScreenScrollView,
 } from "./ProductsOverviewScreen.styles";
 
 const ProductsOverviewScreen = ({ route, navigation }) => {
-  let sneakers = useSelector((state) => state.products.allProducts);
+  let allProducts = useSelector((state) => state.products.allProducts);
 
   const { navigate } = navigation;
 
   const filter = route?.params?.filter;
   if (filter)
-    sneakers = sneakers.filter((obj) => obj.category === filter.toLowerCase());
+    allProducts = allProducts.filter(
+      (obj) => obj.category === filter.toLowerCase()
+    );
 
   return (
     <ProductsOverviewScreenView>
+      <ProductsOverviewScreenScrollView>
+        {allProducts.map((obj) => (
+          <ProductItem
+            key={obj.id}
+            item={obj}
+            action={() =>
+              navigate("Description", {
+                title: obj.name,
+                item: obj,
+              })
+            }
+          />
+        ))}
+      </ProductsOverviewScreenScrollView>
       {/* FIX FLATLIST WEIRD BEHAVIOUR */}
-      <ProductsOverviewScreenFlatList
+      {/* <ProductsOverviewScreenFlatList
         numColumns={1}
+        // initialNumToRender={40}
         // onEndReached={ function }
         // onEndReachedThreshold={ number }
-        data={sneakers}
+        keyExtractor={(obj) => obj.id}
+        data={allProducts}
         renderItem={(data) => (
           <ProductItem
             item={data.item}
@@ -40,7 +59,7 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
             }
           />
         )}
-      />
+      /> */}
     </ProductsOverviewScreenView>
   );
 };

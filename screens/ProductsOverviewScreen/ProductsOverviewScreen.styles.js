@@ -9,6 +9,6 @@ export const ProductsOverviewScreenView = styled.View`
   background-color: ${globalStyles.clPrimary};
 `;
 
-export const ProductsOverviewScreenFlatList = styled(FlatList)`
-  flex: 1;
-`;
+export const ProductsOverviewScreenFlatList = styled(FlatList)``;
+
+export const ProductsOverviewScreenScrollView = styled.ScrollView``;

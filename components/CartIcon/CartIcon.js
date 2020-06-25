@@ -1,5 +1,8 @@
 import React from "react";
 
+// redux
+import { useSelector } from "react-redux";
+
 // iconinc
 import { Feather } from "@expo/vector-icons";
 
@@ -16,8 +19,7 @@ import {
 } from "./CartIcon.styles";
 
 const CartIcon = ({ action }) => {
-  // temporarty
-  const productsAmount = 9;
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   return (
     <CartIconContainer>
@@ -25,9 +27,13 @@ const CartIcon = ({ action }) => {
         <CartIconWrapper>
           <Feather name="shopping-bag" size={28} color={globalStyles.clWhite} />
         </CartIconWrapper>
-        <CartIconBadgeView>
-          <CartIconBadgeText>{productsAmount}</CartIconBadgeText>
-        </CartIconBadgeView>
+        {cartItems.length ? (
+          <CartIconBadgeView>
+            <CartIconBadgeText>
+              {cartItems.reduce((acc, el) => acc + el.quantity, 0)}
+            </CartIconBadgeText>
+          </CartIconBadgeView>
+        ) : null}
       </CartIconTouchable>
     </CartIconContainer>
   );

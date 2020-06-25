@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 // redux
 import { useSelector } from "react-redux";
@@ -30,7 +30,7 @@ const ProductItem = ({ action, item }) => {
             <ProductItemText>{name}</ProductItemText>
           </ProductItemTextView>
           <ProductItemTextView>
-            <ProductItemText>{price}$</ProductItemText>
+            <ProductItemText>${price}</ProductItemText>
           </ProductItemTextView>
         </ProductItemTextWrapper>
       </ProductItemTouchable>
@@ -38,4 +38,4 @@ const ProductItem = ({ action, item }) => {
   );
 };
 
-export default ProductItem;
+export default memo(ProductItem);
