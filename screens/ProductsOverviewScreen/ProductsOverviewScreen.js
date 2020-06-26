@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { loadMoreProducts } from "../../redux/products/products.actions";
 
 // components
 import ProductItem from "../../components/ProductItem/ProductItem";
@@ -9,12 +10,23 @@ import ProductItem from "../../components/ProductItem/ProductItem";
 // sc
 import {
   ProductsOverviewScreenView,
-  ProductsOverviewScreenFlatList,
+  // ProductsOverviewScreenFlatList,
   ProductsOverviewScreenScrollView,
 } from "./ProductsOverviewScreen.styles";
 
 const ProductsOverviewScreen = ({ route, navigation }) => {
   let allProducts = useSelector((state) => state.products.allProducts);
+  let loadedProducts = useSelector((state) => state.products.loadedProducts);
+
+  const dispatch = useDispatch();
+
+  const memoizedLoader = useCallback(() => {
+    dispatch(loadMoreProducts());
+  }, []);
+
+  useEffect(() => {
+    if (!loadedProducts.length) memoizedLoader();
+  }, [loadedProducts.length]);
 
   const { navigate } = navigation;
 
@@ -24,10 +36,27 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
       (obj) => obj.category === filter.toLowerCase()
     );
 
+  const isCloseToBottom = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }) => {
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+  };
+
   return (
     <ProductsOverviewScreenView>
-      <ProductsOverviewScreenScrollView>
-        {allProducts.map((obj) => (
+      <ProductsOverviewScreenScrollView
+        // onMomentumScrollBegin
+        onScroll={({ nativeEvent }) => {
+          if (isCloseToBottom(nativeEvent)) {
+            if (allProducts.length > 0) memoizedLoader();
+            // console.log("Near bottom.");
+          }
+        }}
+        scrollEventThrottle={0}
+      >
+        {loadedProducts.map((obj) => (
           <ProductItem
             key={obj.id}
             item={obj}
@@ -43,11 +72,14 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
       {/* FIX FLATLIST WEIRD BEHAVIOUR */}
       {/* <ProductsOverviewScreenFlatList
         numColumns={1}
-        // initialNumToRender={40}
-        // onEndReached={ function }
-        // onEndReachedThreshold={ number }
+        initialNumToRender={100}
+        onEndReached={({ distanceFromEnd }) => {
+          console.log(distanceFromEnd, "end is reached!");
+          allProducts.length > 0 ? dispatch(loadMoreProducts()) : null;
+        }}
+        onEndReachedThreshold={0.1}
         keyExtractor={(obj) => obj.id}
-        data={allProducts}
+        data={loadedProducts}
         renderItem={(data) => (
           <ProductItem
             item={data.item}
