@@ -1,8 +1,13 @@
-import React, { useEffect, useCallback } from "react";
+// import React, { useEffect, useCallback } from "react";
+import React from "react";
+
+// utils
+// import { isCloseToBottom } from "../../utils/isCloseToBottom";
 
 // redux
-import { useSelector, useDispatch } from "react-redux";
-import { loadMoreProducts } from "../../redux/products/products.actions";
+// import { useSelector, useDispatch } from "react-redux";
+// import { loadMoreProducts } from "../../redux/products/products.actions";
+import { useSelector } from "react-redux";
 
 // components
 import ProductItem from "../../components/ProductItem/ProductItem";
@@ -10,15 +15,16 @@ import ProductItem from "../../components/ProductItem/ProductItem";
 // sc
 import {
   ProductsOverviewScreenView,
-  // ProductsOverviewScreenFlatList,
-  ProductsOverviewScreenScrollView,
+  ProductsOverviewScreenFlatList,
+  // ProductsOverviewScreenScrollView,
 } from "./ProductsOverviewScreen.styles";
 
 const ProductsOverviewScreen = ({ route, navigation }) => {
   let allProducts = useSelector((state) => state.products.allProducts);
-  let loadedProducts = useSelector((state) => state.products.loadedProducts);
+  // let loadedProducts = useSelector((state) => state.products.loadedProducts);
+  // const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+  /*
 
   const memoizedLoader = useCallback(() => {
     dispatch(loadMoreProducts());
@@ -28,6 +34,7 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
     if (!loadedProducts.length) memoizedLoader();
   }, [loadedProducts.length]);
 
+  */
   const { navigate } = navigation;
 
   const filter = route?.params?.filter;
@@ -36,17 +43,10 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
       (obj) => obj.category === filter.toLowerCase()
     );
 
-  const isCloseToBottom = ({
-    layoutMeasurement,
-    contentOffset,
-    contentSize,
-  }) => {
-    return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
-  };
-
   return (
     <ProductsOverviewScreenView>
-      <ProductsOverviewScreenScrollView
+      {/* Reference to on end reached triggers for ScrollView */}
+      {/* <ProductsOverviewScreenScrollView
         // onMomentumScrollBegin
         onScroll={({ nativeEvent }) => {
           if (isCloseToBottom(nativeEvent)) {
@@ -68,18 +68,18 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
             }
           />
         ))}
-      </ProductsOverviewScreenScrollView>
-      {/* FIX FLATLIST WEIRD BEHAVIOUR */}
-      {/* <ProductsOverviewScreenFlatList
+      </ProductsOverviewScreenScrollView> */}
+      <ProductsOverviewScreenFlatList
         numColumns={1}
-        initialNumToRender={100}
-        onEndReached={({ distanceFromEnd }) => {
-          console.log(distanceFromEnd, "end is reached!");
-          allProducts.length > 0 ? dispatch(loadMoreProducts()) : null;
-        }}
-        onEndReachedThreshold={0.1}
+        initialNumToRender={5}
+        // reference to on end reached triggers
+        // onEndReached={({ distanceFromEnd }) => {
+        //   console.log(distanceFromEnd, "end is reached!");
+        //   allProducts.length > 0 ? dispatch(loadMoreProducts()) : null;
+        // }}
+        // onEndReachedThreshold={0.1}
+        data={allProducts}
         keyExtractor={(obj) => obj.id}
-        data={loadedProducts}
         renderItem={(data) => (
           <ProductItem
             item={data.item}
@@ -91,7 +91,7 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
             }
           />
         )}
-      /> */}
+      />
     </ProductsOverviewScreenView>
   );
 };

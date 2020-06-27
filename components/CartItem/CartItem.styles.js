@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
 import globalStyles from "../../constants/globalStyles";
 
+// flex: 1 on container item seems f@cking up flatlist re-rendering
 export const CartItemContainer = styled.View`
-  flex: 1;
   width: 100%;
   height: ${({ width }) => width * 0.32}px;
   padding: 10px;

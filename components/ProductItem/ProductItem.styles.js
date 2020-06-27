@@ -1,14 +1,14 @@
 import styled from "styled-components/native";
 import globalStyles from "../../constants/globalStyles";
 
+// flex: 1 on container item seems f@cking up flatlist re-rendering
 export const ProductItemContainer = styled.View`
-  flex: 1;
   padding: 10px;
   width: 100%;
 `;
 
+// flex: 1 on container item seems f@cking up flatlist re-rendering
 export const ProductItemTouchable = styled.TouchableOpacity`
-  flex: 1;
   width: 100%;
 `;
 

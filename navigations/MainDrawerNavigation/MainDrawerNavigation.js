@@ -6,35 +6,14 @@ import { useSelector } from "react-redux";
 
 // navigations
 import ProductsTabNavigation from "../ProductsTabNavigation/ProductsTabNavigation";
+import OrdersStackNavigator from "../OrdersStackNavigator/OrdersStackNavigator";
+import ManageStackNavigator from "../ManageStackNavigator/ManageStackNavigator";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
 
 // sc
 import {} from "./MainDrawerNavigation.styles";
-
-import { View, Text, Button } from "react-native";
-const Shop = ({ navigation }) => {
-  return (
-    <View>
-      <Text>Shop</Text>
-      <Button title="nav" onPress={navigation.openDrawer} />
-    </View>
-  );
-};
-const Orders = ({ navigation }) => (
-  <View>
-    <Text>Orders</Text>
-    <Button title="nav" onPress={navigation.openDrawer} />
-  </View>
-);
-
-const Manage = ({ navigation }) => (
-  <View>
-    <Text>Manage</Text>
-    <Button title="nav" onPress={navigation.openDrawer} />
-  </View>
-);
 
 const MainDrawerNav = createDrawerNavigator();
 
@@ -67,8 +46,8 @@ const MainDrawerNavigation = () => {
       }}
     >
       <MainDrawerNav.Screen name="Shop" component={ProductsTabNavigation} />
-      <MainDrawerNav.Screen name="Orders" component={Orders} />
-      <MainDrawerNav.Screen name="Manage" component={Manage} />
+      <MainDrawerNav.Screen name="Orders" component={OrdersStackNavigator} />
+      <MainDrawerNav.Screen name="Manage" component={ManageStackNavigator} />
     </MainDrawerNav.Navigator>
   );
 };

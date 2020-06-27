@@ -10,7 +10,7 @@ import Button from "../../components/Button/Button";
 // sc
 import {
   CartScreenView,
-  CartScreenScrollView,
+  CartScreenFlatList,
   CartScreenPurchaseView,
   CartScreenPurchaseButton,
   CartScreenIsEmptyView,
@@ -29,11 +29,11 @@ const CartScreen = () => {
     <CartScreenView>
       {cartItems.length ? (
         <Fragment>
-          <CartScreenScrollView>
-            {cartItems.map((obj) => (
-              <CartItem key={obj.id} item={obj} />
-            ))}
-          </CartScreenScrollView>
+          <CartScreenFlatList
+            data={cartItems}
+            keyExtractor={(obj) => obj.id}
+            renderItem={(data) => <CartItem item={data.item} />}
+          />
           <CartScreenPurchaseView>
             <CartScreenPurchaseButton>
               <Button

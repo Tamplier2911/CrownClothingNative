@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import globalStyles from "../../constants/globalStyles";
+import { FlatList } from "react-native";
 
 export const CartScreenView = styled.View`
   flex: 1;
@@ -7,9 +8,7 @@ export const CartScreenView = styled.View`
   background-color: ${globalStyles.clPrimary};
 `;
 
-export const CartScreenScrollView = styled.ScrollView`
-  flex: 1;
-`;
+export const CartScreenFlatList = styled(FlatList)``;
 
 export const CartScreenPurchaseView = styled.View`
   height: 65px;
