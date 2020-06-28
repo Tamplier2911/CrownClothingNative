@@ -11,6 +11,7 @@ const {
   REMOVE_ITEM_FROM_CART,
   INCREMENT_QUANTITY,
   DECREMENT_QUANTITY,
+  CLEAN_UP_CART,
   FETCH_CART_CONTENT_START,
   FETCH_CART_CONTENT_SUCCESS,
   FETCH_CART_CONTENT_FAILURE,
@@ -43,6 +44,13 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: decrementQuantityOrRemove(state.cartItems, action.payload),
+      };
+    case CLEAN_UP_CART:
+      return {
+        ...state,
+        cartItems: [],
+        isLoading: false,
+        errorMessage: "",
       };
     case FETCH_CART_CONTENT_START:
       return {

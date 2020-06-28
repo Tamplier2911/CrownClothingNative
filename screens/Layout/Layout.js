@@ -15,16 +15,11 @@ import MainDrawerNavigation from "../../navigations/MainDrawerNavigation/MainDra
 import StatusBar from "../../components/StatusBar/StatusBar";
 import Spinner from "../../components/Spinner/Spinner";
 
+// modal
+import Modal from "../../components/Modal/Modal";
+
 // sc
 import { RootLayout } from "./Layout.styles";
-
-// temporary screens
-// import CartScreen from "../CartScreen/CartScreen";
-// import EditProductScreen from "../EditProductScreen/EditProductScreen";
-// import OrdersScreen from "../OrdersScreen/OrdersScreen";
-// import ProductDetailsScreen from "../ProductDetailsScreen/ProductDetailsScreen";
-import ProductsOverviewScreen from "../ProductsOverviewScreen/ProductsOverviewScreen";
-// import UserProductsScreen from "../UserProductsScreen/UserProductsScreen";
 
 const Layout = ({ fontLoaded, getCurrentOrientation, orientation }) => {
   useEffect(() => {
@@ -41,7 +36,7 @@ const Layout = ({ fontLoaded, getCurrentOrientation, orientation }) => {
       <NavigationContainer>
         <MainDrawerNavigation />
       </NavigationContainer>
-      {/* <ProductsOverviewScreen /> */}
+      <Modal />
     </RootLayout>
   ) : (
     <Spinner size="large" />

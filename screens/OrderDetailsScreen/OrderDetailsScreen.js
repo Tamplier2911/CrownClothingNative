@@ -6,10 +6,23 @@ import {
   OrderDetailsScreenText,
 } from "./OrderDetailsScreen.styles";
 
-const OrderDetailsScreen = () => {
+const OrderDetailsScreen = ({ route }) => {
+  const {
+    id,
+    createdAt,
+    status,
+    totalSum,
+    orderedItems,
+    userInfo,
+  } = route.params.item;
+
   return (
     <OrderDetailsScreenView>
-      <OrderDetailsScreenText>OrderDetails Screen</OrderDetailsScreenText>
+      {orderedItems.map((item) => (
+        <OrderDetailsScreenText key={item.id}>
+          {item.name}
+        </OrderDetailsScreenText>
+      ))}
     </OrderDetailsScreenView>
   );
 };

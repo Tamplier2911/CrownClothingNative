@@ -11,6 +11,9 @@ export default {
   clOverlay: "rgba(0, 0, 0, 0.411)",
   clBadge: "#ff3232",
   clCategory: "rgba(255,255,255,0.8)",
+  clSuccess: "#59db71",
+  clDeclined: "#ff4451",
+  clStatus: "#fca74b",
   fontStyle: "font",
   fontStyleLight: "bold",
 };

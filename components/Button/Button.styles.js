@@ -1,12 +1,9 @@
 import styled from "styled-components/native";
 import globalStyles from "../../constants/globalStyles";
 
-export const ButtonTouchable = styled.TouchableOpacity`
-  flex: 1;
-`;
+export const ButtonTouchable = styled.TouchableOpacity``;
 
 export const ButtonTitleWrapper = styled.View`
-  flex: 1;
   padding: 10px;
   background-color: ${globalStyles.clBlack};
   border: 1px solid ${globalStyles.clBlack};

@@ -1,12 +1,30 @@
 import React from "react";
 
-// sc
-import { OrdersScreenView, OrdersScreenText } from "./OrdersScreen.styles";
+// redux
+import { useSelector } from "react-redux";
 
-const OrdersScreen = () => {
+// components
+import OrderItem from "../../components/OrderItem/OrderItem";
+
+// sc
+import { OrdersScreenView, OrdersScreenFlatList } from "./OrdersScreen.styles";
+
+const OrdersScreen = ({ navigation }) => {
+  const orders = useSelector((state) => state.orders.allOrders);
+  const { navigate } = navigation;
+
   return (
     <OrdersScreenView>
-      <OrdersScreenText>Orders Screen</OrdersScreenText>
+      <OrdersScreenFlatList
+        data={orders}
+        keyExtractor={(data) => data.id}
+        renderItem={(data) => (
+          <OrderItem
+            item={data.item}
+            action={() => navigate("Order Details", { item: data.item })}
+          />
+        )}
+      />
     </OrdersScreenView>
   );
 };
