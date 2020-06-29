@@ -13,7 +13,7 @@ import ManageStackNavigator from "../ManageStackNavigator/ManageStackNavigator";
 import globalStyles from "../../constants/globalStyles";
 
 // sc
-import {} from "./MainDrawerNavigation.styles";
+import { renderAppropriateIcon } from "./MainDrawerNavigation.styles";
 
 const MainDrawerNav = createDrawerNavigator();
 
@@ -33,7 +33,9 @@ const MainDrawerNavigation = () => {
       edgeWidth={100}
       drawerContentOptions={{
         style: {},
-        itemStyle: { alignItems: "flex-end" },
+        itemStyle: {
+          alignItems: "flex-start",
+        },
         labelStyle: {
           fontFamily: "font",
           fontSize: 22,
@@ -45,9 +47,27 @@ const MainDrawerNavigation = () => {
         inactiveBackgroundColor: "transparent",
       }}
     >
-      <MainDrawerNav.Screen name="Shop" component={ProductsTabNavigation} />
-      <MainDrawerNav.Screen name="Orders" component={OrdersStackNavigator} />
-      <MainDrawerNav.Screen name="Manage" component={ManageStackNavigator} />
+      <MainDrawerNav.Screen
+        name="Shop"
+        component={ProductsTabNavigation}
+        options={({ route }) => ({
+          drawerIcon: (config) => renderAppropriateIcon(route, config),
+        })}
+      />
+      <MainDrawerNav.Screen
+        name="Orders"
+        component={OrdersStackNavigator}
+        options={({ route }) => ({
+          drawerIcon: (config) => renderAppropriateIcon(route, config),
+        })}
+      />
+      <MainDrawerNav.Screen
+        name="Manage"
+        component={ManageStackNavigator}
+        options={({ route }) => ({
+          drawerIcon: (config) => renderAppropriateIcon(route, config),
+        })}
+      />
     </MainDrawerNav.Navigator>
   );
 };

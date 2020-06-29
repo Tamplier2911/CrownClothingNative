@@ -6,6 +6,7 @@ export default {
   clWhite: "#fff",
   clShadow: "#777",
   clFont: "#333",
+  clFontFaded: "#7a7a7a",
   clFaded: "#969696",
   clInactive: "#898989",
   clOverlay: "rgba(0, 0, 0, 0.411)",
@@ -14,6 +15,7 @@ export default {
   clSuccess: "#59db71",
   clDeclined: "#ff4451",
   clStatus: "#fca74b",
+
   fontStyle: "font",
   fontStyleLight: "bold",
 };

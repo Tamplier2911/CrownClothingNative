@@ -23,7 +23,7 @@ import {
   CartScreenIsEmptyText,
 } from "./CartScreen.styles";
 
-const CartScreen = () => {
+const CartScreen = ({ navigation }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
@@ -31,6 +31,8 @@ const CartScreen = () => {
     (acc, obj) => acc + obj.price * obj.quantity,
     0
   );
+
+  const { navigate } = navigation;
 
   return (
     <CartScreenView>
@@ -73,6 +75,8 @@ const CartScreen = () => {
                         );
                         // clean up cart
                         dispatch(cleanUpCart());
+                        // navigate to Orders screen
+                        navigate("Orders");
                       },
                     })
                   );

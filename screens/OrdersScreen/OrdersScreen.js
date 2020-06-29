@@ -10,7 +10,9 @@ import OrderItem from "../../components/OrderItem/OrderItem";
 import { OrdersScreenView, OrdersScreenFlatList } from "./OrdersScreen.styles";
 
 const OrdersScreen = ({ navigation }) => {
-  const orders = useSelector((state) => state.orders.allOrders);
+  const orders = useSelector((state) => state.orders.allOrders).sort(
+    (a, b) => b.createdAt - a.createdAt
+  );
   const { navigate } = navigation;
 
   return (
