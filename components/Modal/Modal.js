@@ -26,7 +26,9 @@ const Modals = () => {
 
   return (
     <ModalContainer visible={!isHidden} animationType="slide">
-      <ModalContentWrapper>
+      <ModalContentWrapper
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      >
         <ModalTextView>
           <ModalText>{modalText}</ModalText>
         </ModalTextView>

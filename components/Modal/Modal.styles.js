@@ -3,11 +3,9 @@ import globalStyles from "../../constants/globalStyles";
 
 export const ModalContainer = styled.Modal``;
 
-export const ModalContentWrapper = styled.View`
+export const ModalContentWrapper = styled.ScrollView`
   flex: 1;
   padding: 20px;
-
-  justify-content: center;
 `;
 
 export const ModalTextView = styled.View``;

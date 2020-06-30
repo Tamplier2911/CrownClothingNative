@@ -31,11 +31,6 @@ export const EditProductScreenTitleView = styled.View`
   padding: 10px 0;
 `;
 
-export const EditProductScreenCatView = styled.View`
-  flex: 1;
-  padding: 5px 0;
-`;
-
 export const EditProductScreenTitleWrapLeft = styled.View`
   flex: 1;
 `;
@@ -44,15 +39,20 @@ export const EditProductScreenTitleWrapRight = styled.View`
   justify-content: center;
 `;
 
-export const EditProductScreenCatWrap = styled.View`
-  align-items: center;
-`;
-
 export const EditProductScreenTitleText = styled.Text`
   font-family: "font";
   text-transform: uppercase;
   font-size: 30px;
   color: ${globalStyles.clFont};
+`;
+
+export const EditProductScreenCatView = styled.View`
+  flex: 1;
+  padding: 5px 0;
+`;
+
+export const EditProductScreenCatWrap = styled.View`
+  align-items: center;
 `;
 
 export const EditProductScreenCatText = styled.Text`
@@ -74,6 +74,7 @@ export const EditProductScreenDescriptionText = styled.Text`
 
 export const EditProductScreenControlsView = styled.View`
   padding-horizontal: 10px;
+  padding-top: 10px;
   flex-direction: row;
   justify-content: space-between;
 `;

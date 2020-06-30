@@ -2,6 +2,7 @@ import React from "react";
 
 // components
 import Button from "../../components/Button/Button";
+import EditIcon from "../../components/EditIcon/EditIcon";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -37,25 +38,57 @@ const EditProductScreen = ({ route: { params }, navigation }) => {
   const width = useSelector((state) => state.settings.width);
   const dispatch = useDispatch();
 
-  const { category, description, id, imgUrl, name, ownerId, price } = item;
+  const { category, description, id, imgUrl, name, price } = item;
 
-  console.log(item);
   return (
     <EditProductScreenView>
       <EditProductScreenWrapper>
         <EditProductScreenCatView>
           <EditProductScreenCatWrap>
             <EditProductScreenCatText>{category}</EditProductScreenCatText>
+            <EditIcon
+              action={() =>
+                dispatch(
+                  openModal({
+                    text: category,
+                    action: () => console.log("test action"),
+                  })
+                )
+              }
+              position={{ right: "5px", top: "5px" }}
+            />
           </EditProductScreenCatWrap>
         </EditProductScreenCatView>
 
         <EditProductScreenImageView>
           <EditProductScreenImage source={{ uri: imgUrl }} width={width} />
+          <EditIcon
+            action={() =>
+              dispatch(
+                openModal({
+                  text: imgUrl,
+                  action: () => console.log("test action"),
+                })
+              )
+            }
+            position={{ alignSelf: "center", right: "5px", top: "5px" }}
+          />
         </EditProductScreenImageView>
 
         <EditProductScreenTitleView>
           <EditProductScreenTitleWrapLeft>
             <EditProductScreenTitleText>{name}</EditProductScreenTitleText>
+            <EditIcon
+              action={() =>
+                dispatch(
+                  openModal({
+                    text: `${name}, ${price}`,
+                    action: () => console.log("test action"),
+                  })
+                )
+              }
+              position={{ alignSelf: "flex-end", top: "8px" }}
+            />
           </EditProductScreenTitleWrapLeft>
           <EditProductScreenTitleWrapRight>
             <EditProductScreenTitleText>${price}</EditProductScreenTitleText>
@@ -66,6 +99,17 @@ const EditProductScreen = ({ route: { params }, navigation }) => {
           <EditProductScreenDescriptionText>
             {description}
           </EditProductScreenDescriptionText>
+          <EditIcon
+            action={() =>
+              dispatch(
+                openModal({
+                  text: description,
+                  action: () => console.log("test action"),
+                })
+              )
+            }
+            position={{ alignSelf: "flex-end", bottom: "0px" }}
+          />
         </EditProductScreenDescriptionView>
       </EditProductScreenWrapper>
       <EditProductScreenControlsView>
