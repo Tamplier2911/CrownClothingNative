@@ -9,6 +9,12 @@ export const ButtonTitleWrapper = styled.View`
   border: 1px solid ${globalStyles.clBlack};
 `;
 
+export const ButtonDisabledTitleWrapper = styled.View`
+  padding: 10px;
+  background-color: ${globalStyles.clDisabled};
+  border: 1px solid ${globalStyles.clDisabled};
+`;
+
 export const ButtonIconView = styled.View``;
 
 export const ButtonTitleText = styled.Text`

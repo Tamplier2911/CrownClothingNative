@@ -15,6 +15,7 @@ export default {
   clSuccess: "#59db71",
   clDeclined: "#ff4451",
   clStatus: "#fca74b",
+  clDisabled: "#cecece",
 
   fontStyle: "font",
   fontStyleLight: "bold",
