@@ -1,27 +1,31 @@
 import React from "react";
 
 // iconic
-import { FontAwesome } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // globalStyles
 import globalStyles from "../../constants/globalStyles";
 
 // sc
-import { EditIconTouchableView, EditIconWrapper } from "./EditIcon.styles";
+import {
+  EditIconContainer,
+  EditIconTouchable,
+  EditIconWrapper,
+} from "./EditIcon.styles";
 
-const EditIcon = ({ action, position }) => {
+const EditIcon = ({ action }) => {
   return (
-    <EditIconTouchableView
-      onPress={action}
-      activeOpacity={0.5}
-      position={position}
-    >
-      <EditIconWrapper>
-        <MaterialIcons name="edit" size={20} color={globalStyles.clBlack} />
-        {/* <FontAwesome name="edit" size={20} color={globalStyles.clWhite} /> */}
-      </EditIconWrapper>
-    </EditIconTouchableView>
+    <EditIconContainer>
+      <EditIconTouchable onPress={action} activeOpacity={0.5}>
+        <EditIconWrapper>
+          <MaterialCommunityIcons
+            name="circle-edit-outline"
+            size={28}
+            color={globalStyles.clWhite}
+          />
+        </EditIconWrapper>
+      </EditIconTouchable>
+    </EditIconContainer>
   );
 };
 

@@ -4,11 +4,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 // screens
 import UserProductsScreen from "../../screens/UserProductsScreen/UserProductsScreen";
 import EditProductScreen from "../../screens/EditProductScreen/EditProductScreen";
-import CartScreen from "../../screens/CartScreen/CartScreen";
+import CreateProductScreen from "../../screens/CreateProductScreen/CreateProductScreen";
 
 // components
-import CartIcon from "../../components/CartIcon/CartIcon";
+import CreateIcon from "../../components/CreateIcon/CreateIcon";
 import DrawerIcon from "../../components/DrawerIcon/DrawerIcon";
+import EditIcon from "../../components/EditIcon/EditIcon";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -41,7 +42,9 @@ const ManageStackNavigator = () => {
           fontSize: 16,
         },
         headerRight: () => (
-          <CartIcon action={() => navigation.navigate("Cart")} />
+          <CreateIcon
+            action={() => navigation.navigate("Create", { edit: false })}
+          />
         ),
       })}
     >
@@ -56,7 +59,7 @@ const ManageStackNavigator = () => {
       <ManageStackNav.Screen
         name="Edit"
         component={EditProductScreen}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           title:
             route?.params?.title?.length > 25 ? "Edit" : route.params.title,
           headerStyle: {
@@ -64,13 +67,23 @@ const ManageStackNavigator = () => {
             // shadowOpacity:0,
             // elevation: 0,
           },
+          headerRight: () => (
+            <EditIcon
+              action={() =>
+                navigation.navigate("Create", {
+                  edit: true,
+                  item: route.params.item,
+                })
+              }
+            />
+          ),
         })}
       />
       <ManageStackNav.Screen
-        name="Cart"
-        component={CartScreen}
+        name="Create"
+        component={CreateProductScreen}
         options={({ route }) => ({
-          title: "Cart",
+          title: "Create Product",
           headerStyle: {
             backgroundColor: globalStyles.clBlack,
             // shadowOpacity:0,

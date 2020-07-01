@@ -10,9 +10,13 @@ const {
   UPDATE_ONE_PRODUCT_START,
   UPDATE_ONE_PRODUCT_SUCCESS,
   UPDATE_ONE_PRODUCT_FAILURE,
+  CREATE_ONE_PRODUCT_START,
+  CREATE_ONE_PRODUCT_SUCCESS,
+  CREATE_ONE_PRODUCT_FAILURE,
   LOAD_MORE_PRODUCTS,
   DELETE_ONE_PRODUCT,
   UPDATE_ONE_PRODUCT,
+  CREATE_ONE_PRODUCT,
 } = productsTypes;
 
 export const loadMoreProducts = () => ({
@@ -26,5 +30,10 @@ export const deleteOneProduct = (productId) => ({
 
 export const updateOneProduct = (product) => ({
   type: UPDATE_ONE_PRODUCT,
+  payload: product,
+});
+
+export const createOneProduct = (product) => ({
+  type: CREATE_ONE_PRODUCT,
   payload: product,
 });

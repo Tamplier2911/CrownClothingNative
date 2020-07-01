@@ -13,9 +13,13 @@ const {
   UPDATE_ONE_PRODUCT_START,
   UPDATE_ONE_PRODUCT_SUCCESS,
   UPDATE_ONE_PRODUCT_FAILURE,
+  CREATE_ONE_PRODUCT_START,
+  CREATE_ONE_PRODUCT_SUCCESS,
+  CREATE_ONE_PRODUCT_FAILURE,
   LOAD_MORE_PRODUCTS,
   DELETE_ONE_PRODUCT,
   UPDATE_ONE_PRODUCT,
+  CREATE_ONE_PRODUCT,
 } = productsTypes;
 
 const INITIAL_STATE = {
@@ -46,6 +50,8 @@ const productsReducer = (state = INITIAL_STATE, action) => {
           product.id === action.payload.id ? action.payload : product
         ),
       };
+    case CREATE_ONE_PRODUCT:
+      return { ...state, allProducts: [action.payload, ...state.allProducts] };
     default:
       return state;
   }

@@ -80,5 +80,5 @@ export const EditProductScreenControlsView = styled.View`
 `;
 
 export const EditProductScreenButtonView = styled.View`
-  width: 48%;
+  width: 100%;
 `;
