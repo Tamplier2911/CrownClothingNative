@@ -41,11 +41,11 @@ const ManageStackNavigator = () => {
           fontFamily: "font",
           fontSize: 16,
         },
-        headerRight: () => (
-          <CreateIcon
-            action={() => navigation.navigate("Create", { edit: false })}
-          />
-        ),
+        // headerRight: () => (
+        //   <CreateIcon
+        //     action={() => navigation.navigate("Create", { edit: false })}
+        //   />
+        // ),
       })}
     >
       <ManageStackNav.Screen
@@ -54,6 +54,11 @@ const ManageStackNavigator = () => {
         options={({ navigation }) => ({
           title: "Manage",
           headerLeft: () => <DrawerIcon action={navigation.openDrawer} />,
+          headerRight: () => (
+            <CreateIcon
+              action={() => navigation.navigate("Create", { edit: false })}
+            />
+          ),
         })}
       />
       <ManageStackNav.Screen

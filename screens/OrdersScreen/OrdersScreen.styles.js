@@ -10,3 +10,15 @@ export const OrdersScreenView = styled.View`
 `;
 
 export const OrdersScreenFlatList = styled(FlatList)``;
+
+export const OrdersScreenIsEmptyView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const OrdersScreenIsEmptyText = styled.Text`
+  font-family: "font";
+  font-size: 25px;
+  color: ${globalStyles.clFont};
+`;

@@ -7,7 +7,12 @@ import { useSelector } from "react-redux";
 import OrderItem from "../../components/OrderItem/OrderItem";
 
 // sc
-import { OrdersScreenView, OrdersScreenFlatList } from "./OrdersScreen.styles";
+import {
+  OrdersScreenView,
+  OrdersScreenFlatList,
+  OrdersScreenIsEmptyView,
+  OrdersScreenIsEmptyText,
+} from "./OrdersScreen.styles";
 
 const OrdersScreen = ({ navigation }) => {
   const orders = useSelector((state) => state.orders.allOrders).sort(
@@ -17,16 +22,24 @@ const OrdersScreen = ({ navigation }) => {
 
   return (
     <OrdersScreenView>
-      <OrdersScreenFlatList
-        data={orders}
-        keyExtractor={(data) => data.id}
-        renderItem={(data) => (
-          <OrderItem
-            item={data.item}
-            action={() => navigate("Order Details", { item: data.item })}
-          />
-        )}
-      />
+      {orders.length ? (
+        <OrdersScreenFlatList
+          data={orders}
+          keyExtractor={(data) => data.id}
+          renderItem={(data) => (
+            <OrderItem
+              item={data.item}
+              action={() => navigate("Order Details", { item: data.item })}
+            />
+          )}
+        />
+      ) : (
+        <OrdersScreenIsEmptyView>
+          <OrdersScreenIsEmptyText>
+            Your orders list is empty!
+          </OrdersScreenIsEmptyText>
+        </OrdersScreenIsEmptyView>
+      )}
     </OrdersScreenView>
   );
 };

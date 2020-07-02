@@ -41,7 +41,7 @@ const CreateProductScreen = ({ navigation, route }) => {
   const userID = "crwn-clothing-shop";
 
   const [category, setCategory] = useState(edit ? item.category : "");
-  const [imgUrl, setimgUrl] = useState(edit ? item.imgUrl : "");
+  const [imgUrl, setImgUrl] = useState(edit ? item.imgUrl : "");
   const [name, setName] = useState(edit ? item.name : "");
   const [description, setDescription] = useState(edit ? item.description : "");
   const [price, setPrice] = useState("");
@@ -84,8 +84,11 @@ const CreateProductScreen = ({ navigation, route }) => {
     navigate("Manage");
   };
 
-  const disabledButtonValidator = () =>
+  const disabledButtonValidatorCreate = () =>
     !category || !imgUrl || !name || !description || !price ? true : false;
+
+  const disabledButtonValidatorEdit = () =>
+    !category || !imgUrl || !name || !description ? true : false;
 
   return (
     <CreateProductScreenView>
@@ -120,7 +123,7 @@ const CreateProductScreen = ({ navigation, route }) => {
                 </CreateProductScreenTextView>
                 <CreateProductScreenInputWrapper>
                   <CreateProductScreenTextInput
-                    onChangeText={(text) => setimgUrl(text)}
+                    onChangeText={(text) => setImgUrl(text)}
                     value={imgUrl}
                     placeholder="Product image"
                   />
@@ -186,6 +189,7 @@ const CreateProductScreen = ({ navigation, route }) => {
           {edit ? (
             <Button
               title={"Edit"}
+              disabled={disabledButtonValidatorEdit()}
               action={() =>
                 Alert.alert("Attention!", "Save changes?", [
                   {
@@ -194,7 +198,7 @@ const CreateProductScreen = ({ navigation, route }) => {
                     onPress: () => {},
                   },
                   {
-                    text: "Save",
+                    text: "Yes",
                     style: "destructive",
                     onPress: validateAndUpdateProduct,
                   },
@@ -204,8 +208,21 @@ const CreateProductScreen = ({ navigation, route }) => {
           ) : (
             <Button
               title={"Create"}
-              disabled={disabledButtonValidator()}
-              action={validateAndCreateNewProduct}
+              disabled={disabledButtonValidatorCreate()}
+              action={() =>
+                Alert.alert("Attention!", "Create new product?", [
+                  {
+                    text: "Cancel",
+                    style: "cancel",
+                    onPress: () => {},
+                  },
+                  {
+                    text: "Yes",
+                    style: "default",
+                    onPress: validateAndCreateNewProduct,
+                  },
+                ])
+              }
             />
           )}
         </CreateProductScreenButtonView>
