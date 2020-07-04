@@ -16,6 +16,7 @@ const TextInput = ({
   value,
   placeholder,
   keyboardType = "default",
+  secureTextEntry = false,
   label,
   error,
 }) => (
@@ -34,6 +35,7 @@ const TextInput = ({
         value={value}
         placeholder={placeholder}
         keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
       />
     </TextInputWrapper>
   </TextInputContainer>

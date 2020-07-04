@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import ProductsTabNavigation from "../ProductsTabNavigation/ProductsTabNavigation";
 import OrdersStackNavigator from "../OrdersStackNavigator/OrdersStackNavigator";
 import ManageStackNavigator from "../ManageStackNavigator/ManageStackNavigator";
+import LoginStackNavigator from "../LoginStackNavigator/LoginStackNavigator";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -64,6 +65,13 @@ const MainDrawerNavigation = () => {
       <MainDrawerNav.Screen
         name="Manage"
         component={ManageStackNavigator}
+        options={({ route }) => ({
+          drawerIcon: (config) => renderAppropriateIcon(route, config),
+        })}
+      />
+      <MainDrawerNav.Screen
+        name="Login"
+        component={LoginStackNavigator}
         options={({ route }) => ({
           drawerIcon: (config) => renderAppropriateIcon(route, config),
         })}

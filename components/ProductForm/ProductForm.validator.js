@@ -28,8 +28,8 @@ export const inputValidator = (initialData, data, field) => {
     }
   }
 
+  // imgUrl
   if (field === "imgUrl") {
-    // imgUrl
     if (data.length <= 0) {
       (errors.imgUrlError = "Image is required.") && (errors.isValid = false);
     } else if (!validator.isURL(data)) {
@@ -40,8 +40,8 @@ export const inputValidator = (initialData, data, field) => {
     }
   }
 
+  // name
   if (field === "name") {
-    // name
     if (data.length <= 0) {
       (errors.nameError = "Name is required.") && (errors.isValid = false);
     } else if (data.length > 26) {
@@ -51,8 +51,8 @@ export const inputValidator = (initialData, data, field) => {
     }
   }
 
+  // description
   if (field === "description") {
-    // description
     if (data.length <= 0) {
       (errors.descriptionError = "Description is required.") &&
         (errors.isValid = false);
@@ -64,8 +64,8 @@ export const inputValidator = (initialData, data, field) => {
     }
   }
 
+  // price
   if (field === "price") {
-    // price
     if (data.length <= 0) {
       (errors.priceError = "Price is required.") && (errors.isValid = false);
     } else if (Number(data) <= 0) {
