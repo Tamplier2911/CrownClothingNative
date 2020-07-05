@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DrawerIcon from "../../components/DrawerIcon/DrawerIcon";
 
 // screens
+import SignupScreen from "../../screens/SignupScreen/SignupScreen";
 import LoginScreen from "../../screens/LoginScreen/LoginScreen";
 
 // global styles
@@ -18,7 +19,7 @@ const LoginStackNav = createStackNavigator();
 const LoginStackNavigator = () => {
   return (
     <LoginStackNav.Navigator
-      initialRouteName="AppLogin"
+      initialRouteName="AppSignup"
       // mode="modal"
       // stack shared options
       screenOptions={({ navigation }) => ({
@@ -40,11 +41,18 @@ const LoginStackNavigator = () => {
       })}
     >
       <LoginStackNav.Screen
+        name="AppSignup"
+        component={SignupScreen}
+        options={({ navigation }) => ({
+          title: "Sign up",
+          headerLeft: () => <DrawerIcon action={navigation.openDrawer} />,
+        })}
+      />
+      <LoginStackNav.Screen
         name="AppLogin"
         component={LoginScreen}
         options={({ navigation }) => ({
           title: "Log in",
-          headerLeft: () => <DrawerIcon action={navigation.openDrawer} />,
         })}
       />
     </LoginStackNav.Navigator>

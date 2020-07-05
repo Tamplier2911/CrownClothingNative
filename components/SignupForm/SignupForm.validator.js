@@ -16,6 +16,22 @@ export const inputValidator = (initialData, data, field, add) => {
     ...initialData,
   };
 
+  // userDisplayName
+  if (field === "userDisplayName") {
+    if (data.length <= 0) {
+      (errors.userDisplayNameError = "Name is required.") &&
+        (errors.isValid = false);
+    } else if (data.length < 2) {
+      (errors.userDisplayNameError = "Name is too short.") &&
+        (errors.isValid = false);
+    } else if (data.length > 100) {
+      (errors.userDisplayNameError = "Name is too long.") &&
+        (errors.isValid = false);
+    } else {
+      errors.userDisplayNameError = "";
+    }
+  }
+
   // userEmail
   if (field === "userEmail") {
     if (data.length <= 0) {
@@ -43,12 +59,36 @@ export const inputValidator = (initialData, data, field, add) => {
     } else if (data.length < 5) {
       (errors.userPasswordError = "Password is not strong enough.") &&
         (errors.isValid = false);
+    } else if (add.length > 0 && add !== data) {
+      (errors.userPasswordError = "Confirmation must match original.") &&
+        (errors.isValid = false);
     } else {
       errors.userPasswordError = "";
     }
   }
 
-  if (!errors.userEmailError && !errors.userPasswordError)
+  // userPasswordConfirm
+  if (field === "userPasswordConfirm") {
+    if (data.length <= 0) {
+      (errors.userPasswordConfirmError = "Confirmation is required.") &&
+        (errors.isValid = false);
+    } else if (data.length > 100) {
+      (errors.userPasswordConfirmError = "Confirmation is too long.") &&
+        (errors.isValid = false);
+    } else if (data !== add) {
+      (errors.userPasswordConfirmError = "Confirmation must match original.") &&
+        (errors.isValid = false);
+    } else {
+      errors.userPasswordConfirmError = "";
+    }
+  }
+
+  if (
+    !errors.userDisplayNameError &&
+    !errors.userEmailError &&
+    !errors.userPasswordError &&
+    !errors.userPasswordConfirmError
+  )
     errors.isValid = true;
 
   return errors;

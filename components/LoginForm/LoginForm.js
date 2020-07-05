@@ -8,8 +8,17 @@ import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 
+// animatable
+import * as Animatable from "react-native-animatable";
+
+// iconics
+import { Entypo } from "@expo/vector-icons";
+
 // utils
 import { inputValidator } from "./LoginForm.validator";
+
+// global styles
+import globalStyles from "../../constants/globalStyles";
 
 // sc
 import {
@@ -18,6 +27,9 @@ import {
   LoginFormTouchable,
   LoginFormWrapper,
   LoginFormAvoidingView,
+  LoginFormRedirectView,
+  LoginFormRedirectText,
+  LoginFormRedirectTouchable,
   LoginFormControlls,
   LoginFormButtonsView,
 } from "./LoginForm.styles";
@@ -27,20 +39,14 @@ const LoginForm = ({ goBack, navigate }) => {
 
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userPasswordConfirm, setUserPasswordConfirm] = useState("");
+
   const [errors, setErrors] = useState({
     userEmailError: "",
     userPasswordError: "",
-    userPasswordConfirmError: "",
     isValid: false,
   });
 
-  const {
-    userEmailError,
-    userPasswordError,
-    userPasswordConfirmError,
-    isValid,
-  } = errors;
+  const { userEmailError, userPasswordError, isValid } = errors;
 
   // validate and create new user
   // this will be action call - signUpWithEmailAndPassStart
@@ -49,18 +55,15 @@ const LoginForm = ({ goBack, navigate }) => {
     console.log({
       userEmail,
       userPassword,
-      userPasswordConfirm,
     });
 
     // temporary - in reality this component will be dismounted
     // we replace it with another component such as profile
     setUserEmail("");
     setUserPassword("");
-    setUserPasswordConfirm("");
     setErrors({
       userEmailError: "",
       userPasswordError: "",
-      userPasswordConfirmError: "",
       isValid: false,
     });
 
@@ -68,9 +71,7 @@ const LoginForm = ({ goBack, navigate }) => {
   };
 
   const disabledButtonValidatorLogin = () =>
-    !userEmail || !userPassword || !userPasswordConfirm || !isValid
-      ? true
-      : false;
+    !userEmail || !userPassword || !isValid ? true : false;
 
   return (
     <LoginFormView>
@@ -83,6 +84,30 @@ const LoginForm = ({ goBack, navigate }) => {
               behavior={platform === "ios" ? "padding" : "height"}
               keyboardVerticalOffset={100}
             >
+              <LoginFormRedirectView>
+                <LoginFormRedirectTouchable
+                  activeOpacity={0.5}
+                  onPress={() => navigate("AppSignup")}
+                >
+                  <Animatable.View
+                    animation={"fadeInRight"}
+                    duration={2000}
+                    iterationCount={Infinity}
+                    direction={"normal"}
+                  >
+                    <Entypo
+                      name="arrow-bold-left"
+                      size={28}
+                      color={globalStyles.clBlack}
+                    />
+                  </Animatable.View>
+                </LoginFormRedirectTouchable>
+
+                <LoginFormRedirectText>
+                  Create new account
+                </LoginFormRedirectText>
+              </LoginFormRedirectView>
+
               <TextInput
                 onChangeText={(text) => setUserEmail(text)}
                 onBlur={() =>
@@ -101,12 +126,7 @@ const LoginForm = ({ goBack, navigate }) => {
                 onChangeText={(text) => setUserPassword(text)}
                 onBlur={() =>
                   setErrors({
-                    ...inputValidator(
-                      errors,
-                      userPassword,
-                      "userPassword",
-                      userPasswordConfirm
-                    ),
+                    ...inputValidator(errors, userPassword, "userPassword"),
                   })
                 }
                 value={userPassword}
@@ -114,29 +134,6 @@ const LoginForm = ({ goBack, navigate }) => {
                 secureTextEntry={true}
                 label={userPasswordError ? userPasswordError : "Password:"}
                 error={userPasswordError ? true : false}
-              />
-
-              <TextInput
-                onChangeText={(text) => setUserPasswordConfirm(text)}
-                onBlur={() =>
-                  setErrors({
-                    ...inputValidator(
-                      errors,
-                      userPasswordConfirm,
-                      "userPasswordConfirm",
-                      userPassword
-                    ),
-                  })
-                }
-                value={userPasswordConfirm}
-                placeholder="Password"
-                secureTextEntry={true}
-                label={
-                  userPasswordConfirmError
-                    ? userPasswordConfirmError
-                    : "Confirm Password:"
-                }
-                error={userPasswordConfirmError ? true : false}
               />
             </LoginFormAvoidingView>
           </LoginFormWrapper>
