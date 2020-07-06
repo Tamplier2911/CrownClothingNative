@@ -9,6 +9,7 @@ import ProductsTabNavigation from "../ProductsTabNavigation/ProductsTabNavigatio
 import OrdersStackNavigator from "../OrdersStackNavigator/OrdersStackNavigator";
 import ManageStackNavigator from "../ManageStackNavigator/ManageStackNavigator";
 import LoginStackNavigator from "../LoginStackNavigator/LoginStackNavigator";
+import LogoutStackNavigator from "../LogoutStackNavigator/LogoutStackNavigator";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -20,6 +21,7 @@ const MainDrawerNav = createDrawerNavigator();
 
 const MainDrawerNavigation = () => {
   const orientation = useSelector((state) => state.settings.orientation);
+  const userObject = useSelector((state) => state.auth.currentUser);
 
   return (
     <MainDrawerNav.Navigator
@@ -55,27 +57,39 @@ const MainDrawerNavigation = () => {
           drawerIcon: (config) => renderAppropriateIcon(route, config),
         })}
       />
-      <MainDrawerNav.Screen
-        name="Orders"
-        component={OrdersStackNavigator}
-        options={({ route }) => ({
-          drawerIcon: (config) => renderAppropriateIcon(route, config),
-        })}
-      />
-      <MainDrawerNav.Screen
-        name="Manage"
-        component={ManageStackNavigator}
-        options={({ route }) => ({
-          drawerIcon: (config) => renderAppropriateIcon(route, config),
-        })}
-      />
-      <MainDrawerNav.Screen
-        name="Login"
-        component={LoginStackNavigator}
-        options={({ route }) => ({
-          drawerIcon: (config) => renderAppropriateIcon(route, config),
-        })}
-      />
+      {userObject ? (
+        <React.Fragment>
+          <MainDrawerNav.Screen
+            name="Orders"
+            component={OrdersStackNavigator}
+            options={({ route }) => ({
+              drawerIcon: (config) => renderAppropriateIcon(route, config),
+            })}
+          />
+          <MainDrawerNav.Screen
+            name="Manage"
+            component={ManageStackNavigator}
+            options={({ route }) => ({
+              drawerIcon: (config) => renderAppropriateIcon(route, config),
+            })}
+          />
+          <MainDrawerNav.Screen
+            name="Logout"
+            component={LogoutStackNavigator}
+            options={({ route }) => ({
+              drawerIcon: (config) => renderAppropriateIcon(route, config),
+            })}
+          />
+        </React.Fragment>
+      ) : (
+        <MainDrawerNav.Screen
+          name="Login"
+          component={LoginStackNavigator}
+          options={({ route }) => ({
+            drawerIcon: (config) => renderAppropriateIcon(route, config),
+          })}
+        />
+      )}
     </MainDrawerNav.Navigator>
   );
 };

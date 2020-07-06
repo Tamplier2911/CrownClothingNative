@@ -47,5 +47,11 @@ export const renderAppropriateIcon = (route, config) => {
     ) : (
       <Entypo name="login" size={size} color={globalStyles.clFaded} />
     );
+  } else if (name === "Logout") {
+    return focused ? (
+      <Entypo name="log-out" size={size} color={color} />
+    ) : (
+      <Entypo name="log-out" size={size} color={globalStyles.clFaded} />
+    );
   }
 };

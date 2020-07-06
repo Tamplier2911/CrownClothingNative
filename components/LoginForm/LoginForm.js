@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Keyboard, Alert } from "react-native";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { formLogInStart } from "../../redux/auth/auth.actions";
 
 // components
 import Button from "../../components/Button/Button";
@@ -36,6 +37,8 @@ import {
 
 const LoginForm = ({ goBack, navigate }) => {
   const platform = useSelector((state) => state.settings.platform);
+  const loading = useSelector((state) => state.auth.isLoading);
+  const dispatch = useDispatch();
 
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -51,11 +54,12 @@ const LoginForm = ({ goBack, navigate }) => {
   // validate and create new user
   // this will be action call - signUpWithEmailAndPassStart
   const validateAndCreateUser = () => {
-    // logs
-    console.log({
-      userEmail,
-      userPassword,
-    });
+    dispatch(
+      formLogInStart({
+        userEmail: userEmail.trim(),
+        userPassword,
+      })
+    );
 
     // temporary - in reality this component will be dismounted
     // we replace it with another component such as profile
@@ -142,7 +146,7 @@ const LoginForm = ({ goBack, navigate }) => {
       <LoginFormControlls>
         <LoginFormButtonsView>
           <Button
-            title={"Log in"}
+            title={loading ? "Processing..." : "Log in"}
             disabled={disabledButtonValidatorLogin()}
             action={() => {
               Alert.alert("Attention!", "Register new user?", [
