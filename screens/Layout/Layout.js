@@ -5,9 +5,10 @@ import { Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectOrientation } from "../../redux/settings/settings.selectors";
-import { selectIsAuthLoading } from "../../redux/auth/auth.selectors";
+// import { selectIsAuthLoading } from "../../redux/auth/auth.selectors";
 import { getCurrentOrientation } from "../../redux/settings/settings.actions";
 import { checkUserSessionStart } from "../../redux/auth/auth.actions";
+import { fetchAllProductsStart } from "../../redux/products/products.actions";
 
 // navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -27,12 +28,14 @@ const Layout = ({
   fontLoaded,
   getCurrentOrientation,
   checkUserSessionStart,
+  fetchAllProductsStart,
   orientation,
-  isAuthLoading,
+  // isAuthLoading,
 }) => {
   useEffect(() => {
     Dimensions.addEventListener("change", getCurrentOrientation);
     checkUserSessionStart();
+    fetchAllProductsStart();
     return () =>
       Dimensions.removeEventListener("change", getCurrentOrientation);
   }, []);
@@ -55,10 +58,11 @@ const Layout = ({
 
 const mapStateToProps = createStructuredSelector({
   orientation: selectOrientation,
-  isAuthLoading: selectIsAuthLoading,
+  // isAuthLoading: selectIsAuthLoading,
 });
 
 export default connect(mapStateToProps, {
   getCurrentOrientation,
   checkUserSessionStart,
+  fetchAllProductsStart,
 })(Layout);

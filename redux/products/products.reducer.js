@@ -1,6 +1,5 @@
-import { temporaryProducts } from "./products.constants";
-
-import { loadMoreProducts } from "./products.utils";
+// import { temporaryProducts } from "./products.constants";
+// import { loadMoreProducts } from "./products.utils";
 
 import productsTypes from "./products.types";
 const {
@@ -16,42 +15,51 @@ const {
   CREATE_ONE_PRODUCT_START,
   CREATE_ONE_PRODUCT_SUCCESS,
   CREATE_ONE_PRODUCT_FAILURE,
-  LOAD_MORE_PRODUCTS,
-  DELETE_ONE_PRODUCT,
-  UPDATE_ONE_PRODUCT,
-  CREATE_ONE_PRODUCT,
 } = productsTypes;
 
 const INITIAL_STATE = {
-  allProducts: temporaryProducts,
-  loadedProducts: [],
+  // allProducts: temporaryProducts,
+  allProducts: [],
   isLoading: false,
   errorMessage: "",
 };
 
 const productsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LOAD_MORE_PRODUCTS:
-      return {
-        ...state,
-        ...loadMoreProducts(state.allProducts, state.loadedProducts),
-      };
-    case DELETE_ONE_PRODUCT:
-      return {
-        ...state,
-        allProducts: state.allProducts.filter(
-          (product) => product.id !== action.payload
-        ),
-      };
-    case UPDATE_ONE_PRODUCT:
+    case FETCH_ALL_PRODUCTS_START:
+    case UPDATE_ONE_PRODUCT_START:
+    case DELETE_ONE_PRODUCT_START:
+    case CREATE_ONE_PRODUCT_START:
+      return { ...state, isLoading: true };
+    case FETCH_ALL_PRODUCTS_SUCCESS:
+      return { ...state, allProducts: action.payload, isLoading: false };
+    case UPDATE_ONE_PRODUCT_SUCCESS:
       return {
         ...state,
         allProducts: state.allProducts.map((product) =>
           product.id === action.payload.id ? action.payload : product
         ),
+        isLoading: false,
       };
-    case CREATE_ONE_PRODUCT:
-      return { ...state, allProducts: [action.payload, ...state.allProducts] };
+    case DELETE_ONE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        allProducts: state.allProducts.filter(
+          (product) => product.id !== action.payload
+        ),
+        isLoading: false,
+      };
+    case CREATE_ONE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        allProducts: [action.payload, ...state.allProducts],
+        isLoading: false,
+      };
+    case FETCH_ALL_PRODUCTS_FAILURE:
+    case UPDATE_ONE_PRODUCT_FAILURE:
+    case DELETE_ONE_PRODUCT_FAILURE:
+    case CREATE_ONE_PRODUCT_FAILURE:
+      return { ...state, errorMessage: action.payload, isLoading: false };
     default:
       return state;
   }

@@ -4,16 +4,13 @@ import { Keyboard, Alert } from "react-native";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
-  createOneProduct,
-  updateOneProduct,
+  updateOneProductStart,
+  createOneProductStart,
 } from "../../redux/products/products.actions";
 
 // components
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
-
-// utils
-import { uuid } from "../../utils/uuid";
 
 import { inputValidator } from "./ProductForm.validator";
 
@@ -30,6 +27,7 @@ import {
 
 const ProductForm = ({ goBack, navigate, edit, item }) => {
   const platform = useSelector((state) => state.settings.platform);
+  const userID = useSelector((state) => state.auth.currentUser.uid);
   const dispatch = useDispatch();
 
   // state
@@ -56,9 +54,6 @@ const ProductForm = ({ goBack, navigate, edit, item }) => {
     isValid,
   } = errors;
 
-  // temporary dummy userID
-  const userID = "crwn-clothing-shop";
-
   const validateAndUpdateProduct = () => {
     // perform validation here
     const product = {
@@ -69,10 +64,11 @@ const ProductForm = ({ goBack, navigate, edit, item }) => {
       price: Number(item.price),
       ownerId: item.ownerId,
       id: item.id,
+      createdAt: item.createdAt,
     };
 
     // update product
-    dispatch(updateOneProduct(product));
+    dispatch(updateOneProductStart(product));
 
     // navigate to Manage Screen
     navigate("Manage");
@@ -87,11 +83,10 @@ const ProductForm = ({ goBack, navigate, edit, item }) => {
       description: description.trim(),
       price: Number(price),
       ownerId: userID,
-      id: uuid(),
     };
 
     // create product
-    dispatch(createOneProduct(product));
+    dispatch(createOneProductStart(product));
 
     // navigate to Manage Screen
     navigate("Manage");

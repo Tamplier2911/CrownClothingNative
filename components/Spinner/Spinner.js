@@ -6,7 +6,7 @@ import globalStyles from "../../constants/globalStyles";
 // sc
 import { SpinnerElement, SpinnerView } from "./Spinner.styles";
 
-export const Spinner = ({ size }) => {
+export const Spinner = ({ size = "large" }) => {
   const spinnerColor = globalStyles.clBlack;
   return (
     <SpinnerView>

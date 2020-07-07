@@ -9,31 +9,43 @@ import Button from "../Button/Button";
 
 // sc
 import {
+  UserProfileView,
   UserProfileScrollView,
+  UserProfileTopView,
+  UserProfileImageView,
+  UserProfileImage,
   UserProfileTextView,
   UserProfileText,
-  UserProfileButtonView,
+  UserProfileBottomView,
 } from "./UserProfile.styles";
 
 const UserProfile = ({ goBack, navigate }) => {
   const userObject = useSelector((state) => state.auth.currentUser);
+  const width = useSelector((state) => state.settings.width);
   const dispatch = useDispatch();
 
-  const { displayName, email, photoURL, uid } = userObject ? userObject : {};
+  const { displayName, email, photoURL } = userObject ? userObject : {};
 
   return (
-    <UserProfileScrollView
+    <UserProfileView
       contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
     >
       {userObject ? (
         <React.Fragment>
-          <UserProfileTextView>
-            <UserProfileText>{displayName}</UserProfileText>
-            <UserProfileText>{email}</UserProfileText>
-            <UserProfileText>{photoURL}</UserProfileText>
-            <UserProfileText>{uid}</UserProfileText>
-          </UserProfileTextView>
-          <UserProfileButtonView>
+          <UserProfileScrollView>
+            <UserProfileTopView>
+              <UserProfileImageView width={width}>
+                <UserProfileImage source={{ uri: photoURL }} />
+              </UserProfileImageView>
+              <UserProfileTextView>
+                <UserProfileText numberOfLines={1}>
+                  {displayName}
+                </UserProfileText>
+                <UserProfileText numberOfLines={1}>{email}</UserProfileText>
+              </UserProfileTextView>
+            </UserProfileTopView>
+          </UserProfileScrollView>
+          <UserProfileBottomView>
             <Button
               title="Logout"
               action={() => {
@@ -41,14 +53,14 @@ const UserProfile = ({ goBack, navigate }) => {
                 navigate("Shop");
               }}
             />
-          </UserProfileButtonView>
+          </UserProfileBottomView>
         </React.Fragment>
       ) : (
         <UserProfileTextView>
           <UserProfileText>Please log in.</UserProfileText>
         </UserProfileTextView>
       )}
-    </UserProfileScrollView>
+    </UserProfileView>
   );
 };
 

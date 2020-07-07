@@ -592,6 +592,7 @@ export const temporaryProducts = [
   {
     id: "30f438ae-208c-480a-b917-adc2ccbd93ec",
     ownerId: "crwn-clothing-shop",
+    category: "men",
     name: "Camo Down Vest",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

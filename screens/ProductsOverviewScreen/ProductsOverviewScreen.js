@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 // components
 import ProductItem from "../../components/ProductItem/ProductItem";
+import Spinner from "../../components/Spinner/Spinner";
 
 // sc
 import {
@@ -20,7 +21,9 @@ import {
 } from "./ProductsOverviewScreen.styles";
 
 const ProductsOverviewScreen = ({ route, navigation }) => {
-  let allProducts = useSelector((state) => state.products.allProducts);
+  const allProducts = useSelector((state) => state.products.allProducts);
+  const isProductsLoading = useSelector((state) => state.products.isLoading);
+
   // let loadedProducts = useSelector((state) => state.products.loadedProducts);
   // const dispatch = useDispatch();
 
@@ -40,7 +43,7 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
   const filter = route?.params?.filter;
   if (filter)
     allProducts = allProducts.filter(
-      (obj) => obj.category === filter.toLowerCase()
+      (obj) => obj.category.toLowerCase() === filter.toLowerCase()
     );
 
   return (
@@ -69,29 +72,33 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
           />
         ))}
       </ProductsOverviewScreenScrollView> */}
-      <ProductsOverviewScreenFlatList
-        numColumns={1}
-        initialNumToRender={5}
-        // reference to on end reached triggers
-        // onEndReached={({ distanceFromEnd }) => {
-        //   console.log(distanceFromEnd, "end is reached!");
-        //   allProducts.length > 0 ? dispatch(loadMoreProducts()) : null;
-        // }}
-        // onEndReachedThreshold={0.1}
-        data={allProducts}
-        keyExtractor={(obj) => obj.id}
-        renderItem={(data) => (
-          <ProductItem
-            item={data.item}
-            action={() =>
-              navigate("Description", {
-                title: data.item.name,
-                item: data.item,
-              })
-            }
-          />
-        )}
-      />
+      {isProductsLoading ? (
+        <Spinner />
+      ) : (
+        <ProductsOverviewScreenFlatList
+          numColumns={1}
+          initialNumToRender={5}
+          // reference to on end reached triggers
+          // onEndReached={({ distanceFromEnd }) => {
+          //   console.log(distanceFromEnd, "end is reached!");
+          //   allProducts.length > 0 ? dispatch(loadMoreProducts()) : null;
+          // }}
+          // onEndReachedThreshold={0.1}
+          data={allProducts}
+          keyExtractor={(obj) => obj.id}
+          renderItem={(data) => (
+            <ProductItem
+              item={data.item}
+              action={() =>
+                navigate("Description", {
+                  title: data.item.name,
+                  item: data.item,
+                })
+              }
+            />
+          )}
+        />
+      )}
     </ProductsOverviewScreenView>
   );
 };

@@ -6,7 +6,7 @@ import Button from "../../components/Button/Button";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../redux/modal/modal.actions";
-import { deleteOneProduct } from "../../redux/products/products.actions";
+import { deleteOneProductStart } from "../../redux/products/products.actions";
 
 // sc
 import {
@@ -74,7 +74,7 @@ const EditProductScreen = ({ route: { params }, navigation }) => {
                   text: `Are you sure, that you want to delete "${name}" permanently?`,
                   action: () => {
                     // dispatch delete action on product
-                    dispatch(deleteOneProduct(id));
+                    dispatch(deleteOneProductStart(id));
                     // navigate back to manage screen
                     navigate("Manage");
                   },
