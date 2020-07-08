@@ -15,6 +15,8 @@ const {
   FETCH_CART_CONTENT_START,
   FETCH_CART_CONTENT_SUCCESS,
   FETCH_CART_CONTENT_FAILURE,
+  INITIALIZE_CART_IN_DB_FAILURE,
+  UPDATE_CART_IN_DB_FAILURE,
 } = cartTypes;
 
 const INITIAL_STATE = {
@@ -64,6 +66,8 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: action.payload,
       };
     case FETCH_CART_CONTENT_FAILURE:
+    case INITIALIZE_CART_IN_DB_FAILURE:
+    case UPDATE_CART_IN_DB_FAILURE:
       return {
         ...state,
         isLoading: false,

@@ -23,7 +23,6 @@ const UserProfile = ({ goBack, navigate }) => {
   const userObject = useSelector((state) => state.auth.currentUser);
   const width = useSelector((state) => state.settings.width);
   const dispatch = useDispatch();
-
   const { displayName, email, photoURL } = userObject ? userObject : {};
 
   return (

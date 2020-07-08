@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // components
 import DrawerIcon from "../../components/DrawerIcon/DrawerIcon";
+import CartIcon from "../../components/CartIcon/CartIcon";
 
 // screens
 import LogoutScreen from "../../screens/LogoutScreen/LogoutScreen";
@@ -37,6 +38,9 @@ const LogoutStackNavigator = () => {
           fontFamily: "font",
           fontSize: 16,
         },
+        headerRight: () => (
+          <CartIcon action={() => navigation.navigate("Cart")} />
+        ),
       })}
     >
       <LogoutStackNav.Screen

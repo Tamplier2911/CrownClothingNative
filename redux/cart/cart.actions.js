@@ -9,6 +9,12 @@ const {
   FETCH_CART_CONTENT_START,
   FETCH_CART_CONTENT_SUCCESS,
   FETCH_CART_CONTENT_FAILURE,
+  INITIALIZE_CART_IN_DB_START,
+  INITIALIZE_CART_IN_DB_SUCCESS,
+  INITIALIZE_CART_IN_DB_FAILURE,
+  UPDATE_CART_IN_DB_START,
+  UPDATE_CART_IN_DB_SUCCESS,
+  UPDATE_CART_IN_DB_FAILURE,
 } = cartTypes;
 
 export const addItemToCart = (item) => ({
@@ -47,4 +53,26 @@ export const fetchCartContentSuccess = (cartItems) => ({
 export const fetchCartContentFailure = (errorMessage) => ({
   type: FETCH_CART_CONTENT_FAILURE,
   payload: errorMessage,
+});
+
+export const initializeCartInDbStart = () => ({
+  type: INITIALIZE_CART_IN_DB_START,
+});
+
+export const initializeCartInDbSuccess = () => ({
+  type: INITIALIZE_CART_IN_DB_SUCCESS,
+});
+
+export const initializeCartInDbFailure = () => ({
+  type: INITIALIZE_CART_IN_DB_FAILURE,
+});
+
+export const updateCartInDbStart = () => ({ type: UPDATE_CART_IN_DB_START });
+
+export const updateCartInDbSuccess = () => ({
+  type: UPDATE_CART_IN_DB_SUCCESS,
+});
+
+export const updateCartInDbFailure = () => ({
+  type: UPDATE_CART_IN_DB_FAILURE,
 });
