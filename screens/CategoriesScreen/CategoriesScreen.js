@@ -25,6 +25,7 @@ const CategoriesScreen = ({ navigation }) => {
         renderItem={(data) => (
           <CategoryItem
             category={data.item}
+            index={data.index}
             action={() =>
               navigate("Category", {
                 title: data.item.title,

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 // components
 import OrderItem from "../../components/OrderItem/OrderItem";
+import Spiner from "../../components/Spinner/Spinner";
 
 // sc
 import {
@@ -18,11 +19,14 @@ const OrdersScreen = ({ navigation }) => {
   const orders = useSelector((state) => state.orders.allOrders).sort(
     (a, b) => b.createdAt - a.createdAt
   );
+  const ordersIsLoading = useSelector((state) => state.orders.isLoading);
   const { navigate } = navigation;
 
   return (
     <OrdersScreenView>
-      {orders.length ? (
+      {ordersIsLoading ? (
+        <Spiner />
+      ) : orders.length ? (
         <OrdersScreenFlatList
           data={orders}
           keyExtractor={(data) => data.id}

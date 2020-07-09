@@ -36,6 +36,7 @@ const {
   REMOVE_ITEM_FROM_CART,
   INCREMENT_QUANTITY,
   DECREMENT_QUANTITY,
+  CLEAN_UP_CART,
 } = cartTypes;
 
 const userIdExtractor = (state) => state.auth.currentUser;
@@ -116,6 +117,7 @@ export function* onCartManipulation() {
       REMOVE_ITEM_FROM_CART,
       INCREMENT_QUANTITY,
       DECREMENT_QUANTITY,
+      CLEAN_UP_CART,
     ],
     updateCartInDataBase
   );

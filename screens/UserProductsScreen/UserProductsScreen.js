@@ -32,6 +32,7 @@ const UserProductsScreen = ({ navigation }) => {
           renderItem={(data) => (
             <ProductItem
               item={data.item}
+              index={data.index}
               action={() =>
                 navigate("Edit", {
                   title: data.item.name,

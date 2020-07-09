@@ -52,7 +52,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
     case CREATE_ONE_PRODUCT_SUCCESS:
       return {
         ...state,
-        allProducts: [action.payload, ...state.allProducts],
+        allProducts: [...state.allProducts],
         isLoading: false,
       };
     case FETCH_ALL_PRODUCTS_FAILURE:

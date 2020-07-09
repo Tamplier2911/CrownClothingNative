@@ -3,15 +3,13 @@ import React, { Fragment } from "react";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { cleanUpCart } from "../../redux/cart/cart.actions";
-import { createNewOrder } from "../../redux/orders/orders.actions";
+import { createNewOrderStart } from "../../redux/orders/orders.actions";
 import { openModal } from "../../redux/modal/modal.actions";
 
 // components
 import CartItem from "../../components/CartItem/CartItem";
 import Button from "../../components/Button/Button";
-
-// utils
-import { uuid } from "../../utils/uuid";
+import Spinner from "../../components/Spinner/Spinner";
 
 // sc
 import {
@@ -25,6 +23,9 @@ import {
 
 const CartScreen = ({ navigation }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartIsLoading = useSelector((state) => state.cart.isLoading);
+  const user = useSelector((state) => state.auth.currentUser);
+
   const dispatch = useDispatch();
 
   const totalSum = cartItems.reduce(
@@ -36,7 +37,9 @@ const CartScreen = ({ navigation }) => {
 
   return (
     <CartScreenView>
-      {cartItems.length ? (
+      {cartIsLoading ? (
+        <Spinner />
+      ) : cartItems.length ? (
         <Fragment>
           <CartScreenFlatList
             data={cartItems}
@@ -45,43 +48,45 @@ const CartScreen = ({ navigation }) => {
           />
           <CartScreenPurchaseView>
             <CartScreenPurchaseButton>
-              <Button
-                title={`purchase for only $${totalSum}`}
-                action={() => {
-                  dispatch(
-                    openModal({
-                      text: `Purchase an order for $${totalSum}?`,
-                      action: () => {
-                        // dispatch new order
-                        dispatch(
-                          createNewOrder({
-                            id: uuid(),
-                            createdAt: Date.now(),
-                            totalSum: totalSum,
-                            status:
-                              "processing" /* sent, arrived, success, declined */,
-                            orderedItems: cartItems,
-                            userInfo: {
-                              // temporary data
-                              email: "artyom.nikolaiev@yahoo.com",
-                              phone: "+380501301212",
-                              cardDetails: {
-                                number: "4242424242424242",
-                                date: "10/20",
-                                cvv: "123",
+              {user ? (
+                <Button
+                  title={`purchase for only $${totalSum}`}
+                  action={() => {
+                    dispatch(
+                      openModal({
+                        text: `Purchase an order for $${totalSum}?`,
+                        action: () => {
+                          // dispatch new order
+                          dispatch(
+                            createNewOrderStart({
+                              totalSum: totalSum,
+                              status:
+                                "processing" /* sent, arrived, success, declined */,
+                              orderedItems: cartItems,
+                              userInfo: {
+                                email: user?.email || null,
+                                uid: user?.uid || null,
+                                phone: user?.phone || null,
+                                cardDetails: {
+                                  number: user?.card?.num || null,
+                                  date: user?.card?.expireData || null,
+                                  cvv: user?.card?.cvv || null,
+                                },
                               },
-                            },
-                          })
-                        );
-                        // clean up cart
-                        dispatch(cleanUpCart());
-                        // navigate to Orders screen
-                        navigate("Orders");
-                      },
-                    })
-                  );
-                }}
-              />
+                            })
+                          );
+                          // clean up cart
+                          dispatch(cleanUpCart());
+                          // navigate to Orders screen
+                          navigate("Orders");
+                        },
+                      })
+                    );
+                  }}
+                />
+              ) : (
+                <Button title={"Log in"} action={() => navigate("Login")} />
+              )}
             </CartScreenPurchaseButton>
           </CartScreenPurchaseView>
         </Fragment>

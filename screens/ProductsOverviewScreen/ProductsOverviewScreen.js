@@ -21,7 +21,7 @@ import {
 } from "./ProductsOverviewScreen.styles";
 
 const ProductsOverviewScreen = ({ route, navigation }) => {
-  const allProducts = useSelector((state) => state.products.allProducts);
+  let allProducts = useSelector((state) => state.products.allProducts);
   const isProductsLoading = useSelector((state) => state.products.isLoading);
 
   // let loadedProducts = useSelector((state) => state.products.loadedProducts);
@@ -89,6 +89,7 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
           renderItem={(data) => (
             <ProductItem
               item={data.item}
+              index={data.index}
               action={() =>
                 navigate("Description", {
                   title: data.item.name,
