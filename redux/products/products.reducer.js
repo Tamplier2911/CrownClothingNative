@@ -15,6 +15,7 @@ const {
   CREATE_ONE_PRODUCT_START,
   CREATE_ONE_PRODUCT_SUCCESS,
   CREATE_ONE_PRODUCT_FAILURE,
+  REFRESH_PRODUCTS_LIST,
 } = productsTypes;
 
 const INITIAL_STATE = {
@@ -30,6 +31,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_ONE_PRODUCT_START:
     case DELETE_ONE_PRODUCT_START:
     case CREATE_ONE_PRODUCT_START:
+    case REFRESH_PRODUCTS_LIST:
       return { ...state, isLoading: true };
     case FETCH_ALL_PRODUCTS_SUCCESS:
       return { ...state, allProducts: action.payload, isLoading: false };

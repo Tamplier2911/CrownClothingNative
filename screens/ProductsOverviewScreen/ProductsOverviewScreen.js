@@ -5,9 +5,8 @@ import React from "react";
 // import { isCloseToBottom } from "../../utils/isCloseToBottom";
 
 // redux
-// import { useSelector, useDispatch } from "react-redux";
-// import { loadMoreProducts } from "../../redux/products/products.actions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { refreshProductsList } from "../../redux/products/products.actions";
 
 // components
 import ProductItem from "../../components/ProductItem/ProductItem";
@@ -24,8 +23,9 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
   let allProducts = useSelector((state) => state.products.allProducts);
   const isProductsLoading = useSelector((state) => state.products.isLoading);
 
+  const dispatch = useDispatch();
+
   // let loadedProducts = useSelector((state) => state.products.loadedProducts);
-  // const dispatch = useDispatch();
 
   /*
 
@@ -77,6 +77,8 @@ const ProductsOverviewScreen = ({ route, navigation }) => {
       ) : (
         <ProductsOverviewScreenFlatList
           numColumns={1}
+          onRefresh={() => dispatch(refreshProductsList())}
+          refreshing={isProductsLoading}
           initialNumToRender={5}
           // reference to on end reached triggers
           // onEndReached={({ distanceFromEnd }) => {

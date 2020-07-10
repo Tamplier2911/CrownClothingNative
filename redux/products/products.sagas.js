@@ -28,6 +28,7 @@ const {
   UPDATE_ONE_PRODUCT_START,
   DELETE_ONE_PRODUCT_START,
   CREATE_ONE_PRODUCT_START,
+  REFRESH_PRODUCTS_LIST,
 } = productsTypes;
 
 export function* fetchAllProducts() {
@@ -71,7 +72,10 @@ export function* createOneProduct({ payload }) {
 }
 
 export function* onFetchAllProductsStart() {
-  yield takeLatest(FETCH_ALL_PRODUCTS_START, fetchAllProducts);
+  yield takeLatest(
+    [FETCH_ALL_PRODUCTS_START, REFRESH_PRODUCTS_LIST],
+    fetchAllProducts
+  );
 }
 
 export function* onUpdateOneProductStart() {

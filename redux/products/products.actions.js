@@ -13,6 +13,7 @@ const {
   CREATE_ONE_PRODUCT_START,
   CREATE_ONE_PRODUCT_SUCCESS,
   CREATE_ONE_PRODUCT_FAILURE,
+  REFRESH_PRODUCTS_LIST,
 } = productsTypes;
 
 export const fetchAllProductsStart = () => ({
@@ -72,4 +73,8 @@ export const createOneProductSuccess = (product) => ({
 export const createOneProductFailure = (errMessage) => ({
   type: CREATE_ONE_PRODUCT_FAILURE,
   payload: errMessage,
+});
+
+export const refreshProductsList = () => ({
+  type: REFRESH_PRODUCTS_LIST,
 });
