@@ -48,11 +48,11 @@ const CategoriesStackNavigator = () => {
     >
       <CategoriesStackNav.Screen
         name="Categories"
+        component={CategoriesScreen}
         options={({ navigation }) => ({
           title: "Categories",
           headerLeft: () => <DrawerIcon action={navigation.openDrawer} />,
         })}
-        component={CategoriesScreen}
       />
       <CategoriesStackNav.Screen
         name="Category"

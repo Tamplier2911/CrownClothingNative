@@ -20,7 +20,7 @@ export const storeData = async (value, key) => {
 /**
  * @function getData - async function, retreives locally stored pice of data, perform deserialization
  * and returns data as it is.
- * * @param {string} key - key, from which we want to retrieve pice of data.
+ * @param {string} key - key, from which we want to retrieve pice of data.
  */
 
 export const getData = async (key) => {

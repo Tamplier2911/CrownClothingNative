@@ -47,8 +47,6 @@ export function* formSignUp({ payload }) {
       photoURL: `http://picsum.photos/400/400`,
     });
 
-    user.updateProfile;
-
     // save user to DB
     yield call(saveUserToDB, user);
 
@@ -91,10 +89,6 @@ export function* formLogIn({ payload }) {
     } else {
       const { uid, email, displayName, photoURL } = user;
       yield put(formLogInSuccess({ uid, email, displayName, photoURL }));
-
-      // load orders and cart
-      // yield put();
-      // yield put();
     }
   } catch (err) {
     yield put(formLogInFailure(err.message));
@@ -119,10 +113,6 @@ export function* checkUserSession() {
     } else {
       const { uid, email, displayName, photoURL } = userAuth;
       yield put(checkUserSessionSuccess({ uid, email, displayName, photoURL }));
-
-      // load orders and cart
-      // yield put();
-      // yield put();
     }
   } catch (err) {
     yield put(checkUserSessionFailure(err.message));

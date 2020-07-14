@@ -10,6 +10,7 @@ import OrdersStackNavigator from "../OrdersStackNavigator/OrdersStackNavigator";
 import ManageStackNavigator from "../ManageStackNavigator/ManageStackNavigator";
 import LoginStackNavigator from "../LoginStackNavigator/LoginStackNavigator";
 import LogoutStackNavigator from "../LogoutStackNavigator/LogoutStackNavigator";
+import MapStackNavigator from "../MapStackNavigator/MapStackNavigator";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -53,6 +54,13 @@ const MainDrawerNavigation = () => {
       <MainDrawerNav.Screen
         name="Shop"
         component={ProductsTabNavigation}
+        options={({ route }) => ({
+          drawerIcon: (config) => renderAppropriateIcon(route, config),
+        })}
+      />
+      <MainDrawerNav.Screen
+        name="Map"
+        component={MapStackNavigator}
         options={({ route }) => ({
           drawerIcon: (config) => renderAppropriateIcon(route, config),
         })}

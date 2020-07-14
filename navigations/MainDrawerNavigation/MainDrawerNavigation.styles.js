@@ -53,5 +53,15 @@ export const renderAppropriateIcon = (route, config) => {
     ) : (
       <Entypo name="log-out" size={size} color={globalStyles.clFaded} />
     );
+  } else if (name === "Map") {
+    return focused ? (
+      <MaterialCommunityIcons name="map-marker" size={size} color={color} />
+    ) : (
+      <MaterialCommunityIcons
+        name="map-marker"
+        size={size}
+        color={globalStyles.clFaded}
+      />
+    );
   }
 };
