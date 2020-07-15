@@ -8,6 +8,7 @@ import CartIcon from "../../components/CartIcon/CartIcon";
 // screens
 import MapScreen from "../../screens/MapScreen/MapScreen";
 import PathScreen from "../../screens/PathScreen/PathScreen";
+import PickerScreen from "../../screens/PickerScreen/PickerScreen";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -57,6 +58,13 @@ const MapStackNavigator = () => {
         component={PathScreen}
         options={({ navigation }) => ({
           title: "Path",
+        })}
+      />
+      <MapStackNav.Screen
+        name="MapPicker"
+        component={PickerScreen}
+        options={({ navigation }) => ({
+          title: "Image Picker",
         })}
       />
     </MapStackNav.Navigator>

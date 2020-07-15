@@ -16,14 +16,19 @@ const MapScreen = ({ navigation }) => {
   const { navigate } = navigation;
   return (
     <MapScreenView>
-      <MapScreenScrollView>
+      <MapScreenTextWrapper>
+        <MapScreenText>Map Screen</MapScreenText>
+      </MapScreenTextWrapper>
+      <MapScreenScrollView
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      >
         <MapScreenTextWrapper>
-          <MapScreenText>Map Screen</MapScreenText>
-          <MapScreenButtonWrapper>
-            <Button title="Show Path" action={() => navigate("MapPath")} />
-          </MapScreenButtonWrapper>
+          <MapScreenText>placeholder</MapScreenText>
         </MapScreenTextWrapper>
       </MapScreenScrollView>
+      <MapScreenButtonWrapper>
+        <Button title="Show Path" action={() => navigate("MapPath")} />
+      </MapScreenButtonWrapper>
     </MapScreenView>
   );
 };
