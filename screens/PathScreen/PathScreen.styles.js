@@ -6,18 +6,3 @@ export const PathScreenView = styled.View`
   padding: 10px;
   background-color: ${globalStyles.clPrimary};
 `;
-
-export const PathScreenScrollView = styled.ScrollView``;
-
-export const PathScreenTextWrapper = styled.View`
-  margin-bottom: 20px;
-`;
-
-export const PathScreenText = styled.Text`
-  text-align: center;
-  font-family: "font";
-  font-size: 20px;
-  color: ${globalStyles.clBlack};
-`;
-
-export const PathScreenButtonWrapper = styled.View``;

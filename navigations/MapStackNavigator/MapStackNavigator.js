@@ -57,7 +57,7 @@ const MapStackNavigator = () => {
         name="MapPath"
         component={PathScreen}
         options={({ navigation }) => ({
-          title: "Path",
+          title: "Location",
         })}
       />
       <MapStackNav.Screen

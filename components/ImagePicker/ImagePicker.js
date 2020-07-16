@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Alert } from "react-native";
+
 import * as ExpoImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as FileSystem from "expo-file-system";
 import Constants from "expo-constants";
-
-import { Alert } from "react-native";
 
 // redux
 import { useSelector } from "react-redux";
@@ -28,7 +28,7 @@ const ImagePicker = () => {
   const { width } = useSelector((state) => state.settings);
   const { currentUser } = useSelector((state) => state.auth);
 
-  // ask premission for using camera and camera roll once component landed
+  // ask permission for using camera and camera roll once component landed
   const getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(
@@ -94,6 +94,7 @@ const ImagePicker = () => {
 
       await FileSystem.moveAsync({ from, to });
       setImage({ image: to });
+
       Alert.alert(
         "File System",
         "Image saved successfuly.",
@@ -114,14 +115,10 @@ const ImagePicker = () => {
   //   console.log(FileSystem.documentDirectory);
   //   console.log(FileSystem.downloadAsync /*uri, fileUri, options */);
 
-  //   console.log(image);
-
   return (
     <ImagePickerView>
       <ImagePickerTextView>
-        <ImagePickerText>
-          <ImagePickerText>Image Picker Reference:</ImagePickerText>
-        </ImagePickerText>
+        <ImagePickerText>Image Picker Reference:</ImagePickerText>
       </ImagePickerTextView>
       <ImagePickerScrollView
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
@@ -131,9 +128,9 @@ const ImagePicker = () => {
             <ImagePickerImage source={{ uri: image.image }} />
           </ImagePickerImageView>
         ) : (
-          <ImagePickerText>
+          <ImagePickerTextView>
             <ImagePickerText>Please pick an image.</ImagePickerText>
-          </ImagePickerText>
+          </ImagePickerTextView>
         )}
       </ImagePickerScrollView>
 

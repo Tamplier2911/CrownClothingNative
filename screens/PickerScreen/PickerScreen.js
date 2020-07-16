@@ -4,19 +4,12 @@ import React from "react";
 import ImagePicker from "../../components/ImagePicker/ImagePicker";
 
 // sc
-import {
-  PickerScreenView,
-  PickerScreenScrollView,
-} from "./PickerScreen.styles";
+import { PickerScreenView } from "./PickerScreen.styles";
 
 const PickerScreen = () => {
   return (
     <PickerScreenView>
-      {/* <PickerScreenScrollView
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-      > */}
       <ImagePicker />
-      {/* </PickerScreenScrollView> */}
     </PickerScreenView>
   );
 };

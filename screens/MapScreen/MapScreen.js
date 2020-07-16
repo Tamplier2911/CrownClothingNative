@@ -27,7 +27,7 @@ const MapScreen = ({ navigation }) => {
         </MapScreenTextWrapper>
       </MapScreenScrollView>
       <MapScreenButtonWrapper>
-        <Button title="Show Path" action={() => navigate("MapPath")} />
+        <Button title="Show Location" action={() => navigate("MapPath")} />
       </MapScreenButtonWrapper>
     </MapScreenView>
   );
