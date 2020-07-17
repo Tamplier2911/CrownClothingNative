@@ -2,6 +2,7 @@ import React from "react";
 
 // components
 import Button from "../../components/Button/Button";
+import MapHolder from "../../components/MapHolder/MapHolder";
 
 // sc
 import {
@@ -13,22 +14,9 @@ import {
 } from "./MapScreen.styles";
 
 const MapScreen = ({ navigation }) => {
-  const { navigate } = navigation;
   return (
     <MapScreenView>
-      <MapScreenTextWrapper>
-        <MapScreenText>Map Screen</MapScreenText>
-      </MapScreenTextWrapper>
-      <MapScreenScrollView
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-      >
-        <MapScreenTextWrapper>
-          <MapScreenText>placeholder</MapScreenText>
-        </MapScreenTextWrapper>
-      </MapScreenScrollView>
-      <MapScreenButtonWrapper>
-        <Button title="Show Location" action={() => navigate("MapPath")} />
-      </MapScreenButtonWrapper>
+      <MapHolder navigation={navigation} />
     </MapScreenView>
   );
 };

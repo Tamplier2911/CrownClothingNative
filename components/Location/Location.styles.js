@@ -8,7 +8,7 @@ export const LocationView = styled.View`
 export const LocationScrollView = styled.ScrollView``;
 
 export const LocationTextWrapper = styled.View`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const LocationText = styled.Text`
@@ -19,3 +19,8 @@ export const LocationText = styled.Text`
 `;
 
 export const LocationButtonWrapper = styled.View``;
+
+export const LocationMapViewBox = styled.View`
+  flex: 1;
+  margin-bottom: 10px;
+`;

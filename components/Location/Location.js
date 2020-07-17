@@ -4,7 +4,9 @@ import * as ExpoLocation from "expo-location";
 // import Constants from "expo-constants";
 
 // components
-import Button from "../../components/Button/Button";
+import Button from "../Button/Button";
+import MapView from "../MapView/MapView";
+import Spinner from "../Spinner/Spinner";
 
 // sc
 import {
@@ -13,7 +15,11 @@ import {
   LocationTextWrapper,
   LocationText,
   LocationButtonWrapper,
+  LocationMapViewBox,
 } from "./Location.styles";
+
+// constants
+import { locationMarker } from "./Location.constants";
 
 const Location = ({ navigate }) => {
   const [locationData, setLocationData] = useState(null);
@@ -53,14 +59,19 @@ const Location = ({ navigate }) => {
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       >
         {latitude && longitude ? (
-          <LocationTextWrapper>
-            <LocationText>{latitude}</LocationText>
-            <LocationText>{longitude}</LocationText>
-          </LocationTextWrapper>
+          <LocationMapViewBox>
+            <MapView
+              initialRegion={{
+                latitude: latitude,
+                longitude: longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+              markers={locationMarker({ lat: latitude, lon: longitude })}
+            />
+          </LocationMapViewBox>
         ) : (
-          <LocationTextWrapper>
-            <LocationText>Trying to process geolocation...</LocationText>
-          </LocationTextWrapper>
+          <Spinner />
         )}
       </LocationScrollView>
       <LocationButtonWrapper>

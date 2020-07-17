@@ -15,6 +15,7 @@ export default {
   clSuccess: "#59db71",
   clDeclined: "#ff4451",
   clStatus: "#fca74b",
+  clMapPolyline: "#ffd775",
   clDisabled: "#cecece",
 
   fontStyle: "font",
