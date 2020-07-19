@@ -25,7 +25,7 @@ import {
 } from "./ImagePicker.styles";
 
 const ImagePicker = () => {
-  const { width } = useSelector((state) => state.settings);
+  const { width, orientation } = useSelector((state) => state.settings);
   const { currentUser } = useSelector((state) => state.auth);
 
   // ask permission for using camera and camera roll once component landed
@@ -124,7 +124,7 @@ const ImagePicker = () => {
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       >
         {image ? (
-          <ImagePickerImageView width={width}>
+          <ImagePickerImageView width={width} orientation={orientation}>
             <ImagePickerImage source={{ uri: image.image }} />
           </ImagePickerImageView>
         ) : (

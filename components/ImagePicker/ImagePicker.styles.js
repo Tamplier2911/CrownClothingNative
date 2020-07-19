@@ -19,7 +19,8 @@ export const ImagePickerText = styled.Text`
 export const ImagePickerScrollView = styled.ScrollView``;
 
 export const ImagePickerImageView = styled.View`
-  height: ${({ width }) => width * 0.6}px;
+  ${({ orientation, width }) =>
+    orientation === "portrait" ? "height: 100%;" : `height: ${width * 0.6}px;`};
   width: 100%;
 `;
 

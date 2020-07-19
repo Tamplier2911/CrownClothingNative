@@ -17,8 +17,7 @@ import {
 // constants
 import { mapHolderMarkers } from "../MapHolder/MapHolder.constants";
 
-const MapHolder = ({ navigation }) => {
-  const { navigate } = navigation;
+const MapHolder = ({ navigate }) => {
   return (
     <MapHolderView>
       <MapHolderTextWrapper>

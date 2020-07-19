@@ -53,7 +53,7 @@ const LoginForm = ({ goBack, navigate }) => {
 
   // validate and create new user
   // this will be action call - signUpWithEmailAndPassStart
-  const validateAndCreateUser = () => {
+  const validateAndLoginUser = () => {
     dispatch(
       formLogInStart({
         userEmail: userEmail.trim(),
@@ -149,7 +149,7 @@ const LoginForm = ({ goBack, navigate }) => {
             title={loading ? "Processing..." : "Log in"}
             disabled={disabledButtonValidatorLogin()}
             action={() => {
-              Alert.alert("Attention!", "Register new user?", [
+              Alert.alert("Authentication!", "Continue?", [
                 {
                   text: "Cancel",
                   style: "cancel",
@@ -158,7 +158,7 @@ const LoginForm = ({ goBack, navigate }) => {
                 {
                   text: "Yes",
                   style: "default",
-                  onPress: validateAndCreateUser,
+                  onPress: validateAndLoginUser,
                 },
               ]);
             }}

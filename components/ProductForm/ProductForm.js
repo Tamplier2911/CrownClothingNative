@@ -77,7 +77,7 @@ const ProductForm = ({ goBack, navigate, edit, item }) => {
   const validateAndCreateNewProduct = () => {
     // perform validation here
     const product = {
-      category: category.trim(),
+      category: category.toLowerCase().trim(),
       imgUrl: imgUrl.toLowerCase().trim(),
       name: name.trim(),
       description: description.trim(),

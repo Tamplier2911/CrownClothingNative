@@ -23,6 +23,5 @@ export default function App() {
     <Provider store={store}>
       <Layout fontLoaded={fontLoaded} />
     </Provider>
-    // <Layout fontLoaded={fontLoaded} />
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { PROVIDER_GOOGLE } from "react-native-maps";
 
 // global styles
 import globalStyles from "../../constants/globalStyles";
@@ -11,12 +12,19 @@ import {
   MapViewPolyline,
 } from "./MapView.styles";
 
+// constants
+import { mapStyle } from "./MapView.constants";
+
 const MapView = (props) => {
   const { markers } = props;
 
   return (
     <MapViewContainer>
-      <MapViewElement {...props}>
+      <MapViewElement
+        {...props}
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={mapStyle}
+      >
         {markers
           ? markers.map((marker) => {
               return (
@@ -42,7 +50,7 @@ const MapView = (props) => {
               },
             ]}
             strokeColor={globalStyles.clMapPolyline}
-            strokeWidth={6}
+            strokeWidth={4}
           />
         ) : null}
       </MapViewElement>

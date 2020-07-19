@@ -40,8 +40,6 @@ const Layout = ({
       Dimensions.removeEventListener("change", getCurrentOrientation);
   }, []);
 
-  console.log(orientation);
-
   // return fontLoaded && !isAuthLoading ?
   return fontLoaded ? (
     <RootLayout>
