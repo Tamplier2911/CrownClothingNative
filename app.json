@@ -1,10 +1,12 @@
 {
   "expo": {
-    "name": "crwnshop",
-    "slug": "crwnshop",
-    "platforms": ["ios", "android", "web"],
+    "name": "Crown Clothing",
+    "description": "Crown Clothing is e-commerce native app, powerd by Expo. State is managed by redux & redux-sagas, React Navigation v5 as a navigation module, data persistency achieved utilizing firebase api, as well, leverage location, map, camera and filesystem api for reference.",
+    "slug": "crown-clothing-shop",
+    "privacy": "public",
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
-    "orientation": "default",
+    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",

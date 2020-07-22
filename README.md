@@ -8,6 +8,9 @@ Using React Native, state is managed by redux & redux-sagas, React Navigation v5
 
 ## Preview
 
+Android users with Expo app installed are welcome.
+https://expo.io/@tamplier2911/crown-clothing-shop
+
 - **Booting** - App booting / Pull refresh
 
 <a href="https://imgflip.com/gif/48sd71"><img src="https://i.imgflip.com/48sd71.gif" title="made at imgflip.com"/></a>
