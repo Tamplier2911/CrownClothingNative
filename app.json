@@ -18,7 +18,14 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.applify-tech.crown-clothing",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.applifytech.crownclothing",
+      "versionCode": 1,
+      "permissions": ["LOCATION", "CAMERA", "CAMERA_ROLL", "NOTIFICATIONS"]
     }
   }
 }
