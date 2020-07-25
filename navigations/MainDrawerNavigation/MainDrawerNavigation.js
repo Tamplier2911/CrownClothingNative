@@ -35,6 +35,10 @@ const MainDrawerNavigation = () => {
       }}
       overlayColor={globalStyles.clOverlay}
       edgeWidth={100}
+      /* drawerContent={(state, navigation, descriptors, progress) => {
+        // function that returns React element to render 
+        // as the content of the drawer, for example, navigation items
+      }} */
       drawerContentOptions={{
         style: {},
         itemStyle: {
